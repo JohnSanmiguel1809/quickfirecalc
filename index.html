@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickFireCalc.io | Smart FIRE & Investment Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #2563eb; --secondary: #10b981; --danger: #ef4444; --dark: #0f172a; --gray: #64748b; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: var(--dark); line-height: 1.6; padding: 20px; }
+        
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        /* Card de la Calculadora */
+        .card { background: white; padding: 2rem; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+        
+        .lang-switch { text-align: right; margin-bottom: 1rem; }
+        .lang-btn { background: #e2e8f0; border: none; padding: 6px 14px; border-radius: 50px; cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: 0.3s; }
+        .lang-btn:hover { background: var(--primary); color: white; }
+
+        h1 { font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center; color: var(--dark); }
+        h2 { font-size: 1.4rem; margin: 2rem 0 1rem; color: var(--primary); }
+
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 600px) { .input-grid { grid-template-columns: 1fr; } }
+
+        .input-group { margin-bottom: 1.2rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.85rem; color: var(--gray); }
+        input { width: 100%; padding: 0.8rem; border: 2px solid #f1f5f9; border-radius: 12px; font-size: 1rem; outline: none; transition: 0.2s; }
+        input:focus { border-color: var(--primary); }
+
+        .panic-btn { width: 100%; background: var(--dark); color: white; border: none; padding: 1rem; border-radius: 12px; font-weight: 800; cursor: pointer; margin: 10px 0; transition: 0.3s; }
+        .panic-btn:hover { background: var(--danger); transform: scale(1.02); }
+
+        .result-box { background: #f8fafc; padding: 1.5rem; border-radius: 16px; text-align: center; border: 2px dashed #cbd5e1; margin-top: 1rem; }
+        #fire-date { font-size: 2.2rem; font-weight: 800; color: var(--primary); display: block; }
+        
+        /* Secciones de Contenido SEO */
+        .content-section { background: white; padding: 2rem; border-radius: 24px; margin-bottom: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        p { margin-bottom: 1rem; color: #475569; font-size: 0.95rem; }
+
+        footer { text-align: center; margin-top: 3rem; padding-bottom: 2rem; border-top: 1px solid #e2e8f0; padding-top: 1rem; }
+        .legal-links a { color: var(--gray); font-size: 0.8rem; margin: 0 10px; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="setLang('es')">ESP</button>
+            <button class="lang-btn" onclick="setLang('en')">ENG</button>
+        </div>
+
+        <h1 id="title">Quick FIRE Calculator</h1>
+        
+        <div class="input-grid">
+            <div class="input-group">
+                <label id="lbl-spend">Gasto Mensual Deseado</label>
+                <input type="number" id="spend" value="2000" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label id="lbl-capital">Capital Actual</label>
+                <input type="number" id="capital" value="10000" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label id="lbl-save">Ahorro Mensual</label>
+                <input type="number" id="save" value="500" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label id="lbl-return">Rentabilidad Anual (%)</label>
+                <input type="number" id="return" value="7" oninput="calculate()">
+            </div>
+        </div>
+
+        <button class="panic-btn" id="panic-btn" onclick="applyPanic()">⚠️ MARKET CRASH (-50%)</button>
+
+        <div class="result-box">
+            <span id="res-text">Tiempo hasta tu libertad:</span>
+            <span id="fire-date">-</span>
+            <small id="target-amount"></small>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2 id="h2-1">Metodología FIRE y la Regla del 4%</h2>
+        <p id="p-1">Nuestra Calculadora Quick FIRE utiliza el algoritmo de interés compuesto mensual basado en la Regla del 4%, el estándar académico para la independencia financiera. Este modelo calcula el 'Número FIRE' (25 veces tu gasto anual previsto).</p>
+        
+        <h2 id="h2-2">Importancia del Stress Test</h2>
+        <p id="p-2">¿Es tu plan de retiro resistente a una crisis? El mercado no siempre crece de forma lineal. Por ello, hemos incluido un simulador de Market Crash para entender cómo una corrección del 50% afecta tu meta.</p>
+        
+        <h2 id="h2-3">Estrategias para 2026</h2>
+        <p id="p-3">Para reducir los años que te faltan, existen tres palancas: aumentar tu tasa de ahorro, reducir gastos y optimizar la rentabilidad mediante ETFs y activos digitales.</p>
+    </div>
+
+    <footer>
+        <div class="legal-links">
+            <a href="#" id="link-priv">Privacy Policy</a>
+            <a href="#" id="link-legal">Legal Notice</a>
+            <a href="#" id="link-contact">Contact</a>
+        </div>
+        <p style="font-size: 0.7rem; margin-top: 10px;">&copy; 2026 QuickFireCalc.io</p>
+    </footer>
+</div>
+
+<script>
+    let panic = 1;
+    let currentLang = 'es';
+
+    const texts = {
+        es: {
+            title: "Calculadora Quick FIRE",
+            lblSpend: "Gasto Mensual Deseado (€)",
+            lblCapital: "Capital Actual (€)",
+            lblSave: "Ahorro Mensual (€)",
+            lblReturn: "Rentabilidad Anual (%)",
+            panic: "⚠️ CRASH DEL MERCADO (-50%)",
+            res: "Tiempo hasta tu libertad:",
+            target: "Meta: ",
+            years: "años", months: "meses",
+            h2_1: "Metodología FIRE y la Regla del 4%",
+            p1: "Nuestra Calculadora Quick FIRE utiliza el algoritmo de interés compuesto basado en la Regla del 4%, el estándar para la independencia financiera en 2026.",
+            h2_2: "Importancia del Stress Test",
+            p2: "Entender cómo una corrección del 50% en tu capital inicial afecta tu línea de tiempo es vital para minimizar riesgos ante la volatilidad global.",
+            h2_3: "Estrategias para acelerar tu Libertad",
+            p3: "Optimizar la rentabilidad de tus inversiones y reducir gastos fijos son las palancas clave para alcanzar tu punto de equilibrio financiero.",
+            l1: "Privacidad", l2: "Aviso Legal", l3: "Contacto"
+        },
+        en: {
+            title: "Quick FIRE Calculator",
+            lblSpend: "Desired Monthly Spend ($)",
+            lblCapital: "Current Capital ($)",
+            lblSave: "Monthly Savings ($)",
+            lblReturn: "Expected Annual Return (%)",
+            panic: "⚠️ MARKET CRASH (-50%)",
+            res: "Time to Freedom:",
+            target: "Target: ",
+            years: "years", months: "months",
+            h2_1: "FIRE Methodology & The 4% Rule",
+            p1: "Our Quick FIRE Calculator uses the compound interest algorithm based on the 4% Rule, the global academic standard for financial independence.",
+            h2_2: "The Importance of Stress Testing",
+            p2: "Knowing how a 50% market correction impacts your timeline is vital for risk management in today's volatile financial ecosystem.",
+            h2_3: "Accelerating Your Freedom",
+            p3: "Optimizing investment returns and reducing fixed costs are the primary levers to reach your financial break-even point faster.",
+            l1: "Privacy Policy", l2: "Legal Notice", l3: "Contact"
+        }
+    };
+
+    function setLang(lang) {
+        currentLang = lang;
+        const t = texts[lang];
+        document.getElementById('title').innerText = t.title;
+        document.getElementById('lbl-spend').innerText = t.lblSpend;
+        document.getElementById('lbl-capital').innerText = t.lblCapital;
+        document.getElementById('lbl-save').innerText = t.lblSave;
+        document.getElementById('lbl-return').innerText = t.lblReturn;
+        document.getElementById('panic-btn').innerText = t.panic;
+        document.getElementById('res-text').innerText = t.res;
+        document.getElementById('h2-1').innerText = t.h2_1;
+        document.getElementById('p-1').innerText = t.p1;
+        document.getElementById('h2-2').innerText = t.h2_2;
+        document.getElementById('p-2').innerText = t.p2;
+        document.getElementById('h2-3').innerText = t.h2_3;
+        document.getElementById('p-3').innerText = t.p3;
+        document.getElementById('link-priv').innerText = t.l1;
+        document.getElementById('link-legal').innerText = t.l2;
+        document.getElementById('link-contact').innerText = t.l3;
+        calculate();
+    }
+
+    function applyPanic() {
+        panic = 0.5;
+        calculate();
+        alert(currentLang === 'es' ? "¡Crash del mercado aplicado! Tu capital se ha reducido a la mitad para el cálculo." : "Market crash applied! Your capital has been halved for the calculation.");
+    }
+
+    function calculate() {
+        const spend = parseFloat(document.getElementById('spend').value) * 12;
+        let cap = parseFloat(document.getElementById('capital').value) * panic;
+        const save = parseFloat(document.getElementById('save').value);
+        const rate = (parseFloat(document.getElementById('return').value) / 100) / 12;
+        const target = spend * 25;
+        let months = 0;
+
+        if(save <= 0 && (cap * rate * 12) < spend) {
+            document.getElementById('fire-date').innerText = "∞";
+            return;
+        }
+
+        while(cap < target && months < 1200) {
+            cap = (cap + save) * (1 + rate);
+            months++;
+        }
+
+        const y = Math.floor(months / 12);
+        const m = months % 12;
+        document.getElementById('fire-date').innerText = `${y} ${texts[currentLang].years} & ${m} ${texts[currentLang].months}`;
+        document.getElementById('target-amount').innerText = `${texts[currentLang].target} ${target.toLocaleString()} €/$`;
+    }
+
+    setLang('es'); // Inicia en español por defecto
+</script>
+
+</body>
+</html>
