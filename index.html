@@ -29,56 +29,54 @@
         :root { --primary: #2563eb; --secondary: #10b981; --danger: #ef4444; --dark: #0f172a; --gray: #64748b; --bg: #f8fafc; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--dark); padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; }
+        .container { max-width: 1100px; margin: 0 auto; }
         
         .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .logo { font-weight: 800; font-size: 1.2rem; color: var(--primary); }
-        .lang-btn { background: white; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+        .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); }
+        .lang-btn { background: white; border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 12px; cursor: pointer; font-weight: 600; }
 
-        .main-grid { display: grid; grid-template-columns: 350px 1fr; gap: 20px; }
-        @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+        .main-grid { display: grid; grid-template-columns: 380px 1fr; gap: 25px; }
+        @media (max-width: 950px) { .main-grid { grid-template-columns: 1fr; } }
 
-        .card { background: white; padding: 1.5rem; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; }
-        h1 { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 800; }
+        .card { background: white; padding: 2rem; border-radius: 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; height: fit-content; }
+        h1 { font-size: 1.6rem; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -0.5px; }
 
-        .input-group { margin-bottom: 1rem; }
-        label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.8rem; color: var(--gray); }
+        .input-group { margin-bottom: 1.2rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.85rem; color: var(--gray); }
         .input-wrapper { position: relative; }
-        .input-wrapper span { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray); font-weight: 600; }
-        input { width: 100%; padding: 0.7rem 0.7rem 0.7rem 2.2rem; border: 2px solid #f1f5f9; border-radius: 12px; font-size: 1rem; font-weight: 600; outline: none; transition: 0.2s; }
-        input:focus { border-color: var(--primary); background: #fff; }
+        .input-wrapper span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); font-weight: 700; }
+        input { width: 100%; padding: 0.8rem 0.8rem 0.8rem 2.5rem; border: 2px solid #f1f5f9; border-radius: 14px; font-size: 1rem; font-weight: 700; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.05); }
 
-        .action-buttons { display: flex; gap: 10px; margin: 1rem 0; }
-        .panic-btn { flex: 2; background: #1e293b; color: white; border: none; padding: 0.8rem; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 0.8rem; }
-        .panic-btn:hover { background: var(--danger); }
-        .reset-btn { flex: 1; display: none; background: white; color: var(--secondary); border: 2px solid var(--secondary); border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 0.8rem; }
+        .action-buttons { display: flex; gap: 10px; margin: 1.5rem 0; }
+        .panic-btn { flex: 3; background: #1e293b; color: white; border: none; padding: 1rem; border-radius: 14px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .panic-btn:hover { background: var(--danger); transform: translateY(-2px); }
+        .reset-btn { flex: 1; display: none; background: white; color: var(--secondary); border: 2px solid var(--secondary); border-radius: 14px; font-weight: 800; cursor: pointer; }
 
-        .result-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); padding: 1.2rem; border-radius: 18px; text-align: center; }
-        #fire-date { font-size: 1.8rem; font-weight: 800; color: var(--dark); display: block; }
-        #target-amount { font-weight: 600; color: var(--gray); font-size: 0.8rem; }
-
-        .chart-container { background: white; padding: 1.5rem; border-radius: 24px; border: 1px solid #f1f5f9; position: relative; min-height: 400px; }
+        .result-box { background: linear-gradient(135deg, #f0f7ff 0%, #e0efff 100%); padding: 1.5rem; border-radius: 20px; text-align: center; border: 1px solid rgba(37, 99, 235, 0.1); }
+        #res-text { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+        #fire-date { font-size: 2rem; font-weight: 800; color: var(--dark); margin: 0.5rem 0; display: block; }
         
-        footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid #e2e8f0; font-size: 0.8rem; color: var(--gray); }
-        footer a { color: var(--primary); text-decoration: none; margin: 0 10px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .stat-card { background: white; padding: 12px; border-radius: 14px; border: 1px solid rgba(0,0,0,0.03); }
+        .stat-label { font-size: 0.65rem; color: var(--gray); font-weight: 700; text-transform: uppercase; }
+        .stat-value { font-size: 1.1rem; font-weight: 800; color: var(--dark); display: block; }
 
+        .chart-container { background: white; padding: 2rem; border-radius: 28px; border: 1px solid #f1f5f9; min-height: 500px; display: flex; flex-direction: column; }
+        canvas { flex-grow: 1; width: 100% !important; }
 
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-.stat-card { background: rgba(255,255,255,0.5); padding: 10px; border-radius: 12px; border: 1px solid rgba(37, 99, 235, 0.1); }
-.stat-label { font-size: 0.65rem; color: var(--gray); text-transform: uppercase; font-weight: 700; }
-.stat-value { font-size: 1.1rem; font-weight: 800; color: var(--primary); display: block; }
-  
-  
+        footer { text-align: center; padding: 3rem 0; color: var(--gray); font-size: 0.9rem; }
+        footer a { color: var(--primary); text-decoration: none; font-weight: 600; margin: 0 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header-nav">
-        <div class="logo">QuickFireCalc.io</div>
+        <div class="logo">QuickFireCalc<span style="color:var(--dark)">.io</span></div>
         <div>
-            <button class="lang-btn" onclick="setLang('es')">ESP</button>
-            <button class="lang-btn" onclick="setLang('en')">ENG</button>
+            <button class="lang-btn" onclick="setLang('es')">🇲🇽 ESP</button>
+            <button class="lang-btn" onclick="setLang('en')">🇺🇸 ENG</button>
         </div>
     </div>
 
@@ -108,19 +106,19 @@
             </div>
 
             <div class="result-box">
-    <span id="res-text">TIEMPO HASTA TU RETIRO</span>
-    <span id="fire-date">-</span>
-    <div class="stats-grid">
-        <div class="stat-card">
-            <span class="stat-label">FI Ratio</span>
-            <span id="fi-ratio" class="stat-value">0%</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-label" id="lbl-target-sub">Meta Total</span>
-            <span id="target-val" class="stat-value">$0</span>
-        </div>
-    </div>
-</div>
+                <span id="res-text">TIEMPO HASTA TU RETIRO</span>
+                <span id="fire-date">-</span>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-label">FI Ratio</span>
+                        <span id="fi-ratio" class="stat-value">0%</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label" id="lbl-target-sub">Meta Total</span>
+                        <span id="target-val" class="stat-value">$0</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="chart-container">
@@ -130,9 +128,9 @@
 
     <footer>
         <a href="privacy.html" id="link-priv">Privacidad</a> | 
-        <a href="legal.html" id="link-legal">Legal</a> | 
+        <a href="legal.html" id="link-legal">Legal Notice</a> | 
         <a href="mailto:hola@quickfirecalc.io">Contacto</a>
-        <p style="margin-top: 10px;">&copy; 2026 QuickFireCalc.io</p>
+        <p style="margin-top: 15px;">&copy; 2026 QuickFireCalc.io</p>
     </footer>
 </div>
 
@@ -142,8 +140,18 @@
     let fireChart;
 
     const texts = {
-        es: { title: "Calcula tu Libertad", lblSpend: "Gasto Mensual", lblCapital: "Capital Inicial", lblSave: "Ahorro Mensual", lblReturn: "Rentabilidad Anual", panic: "CRASH DEL MERCADO", res: "TIEMPO HASTA TU RETIRO", target: "Meta: ", years: "años", months: "meses", chartInc: "Ingresos Pasivos", chartExp: "Gastos", chartLabel: "Años" },
-        en: { title: "Plan your Freedom", lblSpend: "Monthly Spend", lblCapital: "Initial Capital", lblSave: "Monthly Savings", lblReturn: "Annual Return", panic: "MARKET CRASH", res: "TIME TO RETIRE", target: "Target: ", years: "years", months: "months", chartInc: "Passive Income", chartExp: "Expenses", chartLabel: "Years" }
+        es: { 
+            title: "Calcula tu Libertad", lblSpend: "Gasto Mensual Deseado", lblCapital: "Capital Actual", 
+            lblSave: "Ahorro Mensual", lblReturn: "Rentabilidad Anual (%)", panic: "CRASH DEL MERCADO", 
+            res: "TIEMPO HASTA TU RETIRO", target: "Meta Total", years: "años", months: "meses",
+            chartInc: "Ingresos Pasivos (4%)", chartExp: "Tus Gastos Anuales"
+        },
+        en: { 
+            title: "Plan your Freedom", lblSpend: "Monthly Spending", lblCapital: "Current Capital", 
+            lblSave: "Monthly Savings", lblReturn: "Annual Return (%)", panic: "MARKET CRASH", 
+            res: "TIME TO RETIRE", target: "Total Target", years: "years", months: "months",
+            chartInc: "Passive Income (4%)", chartExp: "Annual Expenses"
+        }
     };
 
     function initChart() {
@@ -153,69 +161,108 @@
             data: {
                 labels: [],
                 datasets: [
-                    { label: texts[currentLang].chartInc, data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.1)', fill: true, tension: 0.4 },
-                    { label: texts[currentLang].chartExp, data: [], borderColor: '#ef4444', borderDash: [5, 5], fill: false }
+                    { 
+                        label: texts[currentLang].chartInc, 
+                        data: [], 
+                        borderColor: '#2563eb', 
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)', 
+                        fill: true, 
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointRadius: 0
+                    },
+                    { 
+                        label: texts[currentLang].chartExp, 
+                        data: [], 
+                        borderColor: '#ef4444', 
+                        borderDash: [5, 5], 
+                        fill: false,
+                        borderWidth: 2,
+                        pointRadius: 0
+                    }
                 ]
             },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } } }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { intersect: false, mode: 'index' },
+                plugins: {
+                    legend: { position: 'top', labels: { font: { family: 'Plus Jakarta Sans', weight: '600' } } }
+                },
+                scales: {
+                    y: { beginAtZero: true, ticks: { callback: value => '$' + value.toLocaleString() } }
+                }
+            }
         });
     }
 
     function calculate() {
         const spendMonthly = parseFloat(document.getElementById('spend').value) || 0;
         const spendAnnual = spendMonthly * 12;
-        let cap = (parseFloat(document.getElementById('capital').value) || 0) * panic;
+        const baseCapital = parseFloat(document.getElementById('capital').value) || 0;
+        let cap = baseCapital * panic;
         const save = parseFloat(document.getElementById('save').value) || 0;
         const annualRate = (parseFloat(document.getElementById('return').value) || 0) / 100;
         const monthlyRate = annualRate / 12;
-        
         const target = spendAnnual * 25;
-        let months = 0;
-        let chartDataCap = [];
-        let chartLabels = [];
-        let chartDataExp = [];
 
-        // Simulación 30 años o hasta meta
+        // Métricas rápidas
+        const fiRatio = target > 0 ? Math.min((cap / target) * 100, 100).toFixed(1) : 0;
+        document.getElementById('fi-ratio').innerText = fiRatio + "%";
+        document.getElementById('target-val').innerText = "$" + target.toLocaleString();
+
+        // Datos para el gráfico (simulación 40 años)
+        let chartLabels = [];
+        let chartDataInc = [];
+        let chartDataExp = [];
         let tempCap = cap;
+
         for (let y = 0; y <= 40; y++) {
             chartLabels.push(y);
             chartDataExp.push(spendAnnual);
-            // Ingreso pasivo estimado (4% del capital actual)
-            chartDataCap.push((tempCap * 0.04));
+            chartDataInc.push(Math.round(tempCap * 0.04));
             
             for(let m = 0; m < 12; m++) {
                 tempCap = (tempCap + save) * (1 + monthlyRate);
             }
         }
 
-        // Cálculo exacto de meses para el resultado
+        // Tiempo exacto
+        let months = 0;
         let calcCap = cap;
-        while(calcCap < target && months < 1200) {
-            calcCap = (calcCap + save) * (1 + monthlyRate);
-            months++;
+        if ((save * 12 + (calcCap * annualRate)) > 0) {
+            while(calcCap < target && months < 1200) {
+                calcCap = (calcCap + save) * (1 + monthlyRate);
+                months++;
+            }
         }
 
-        const y = Math.floor(months / 12);
-        const m = months % 12;
-        document.getElementById('fire-date').innerText = months >= 1200 ? "+40 " + texts[currentLang].years : `${y} ${texts[currentLang].years} & ${m} ${texts[currentLang].months}`;
-        document.getElementById('target-amount').innerText = `${texts[currentLang].target} ${target.toLocaleString()} $`;
+        const yrs = Math.floor(months / 12);
+        const mths = months % 12;
+        const resEl = document.getElementById('fire-date');
+        
+        if (cap >= target) {
+            resEl.innerText = currentLang === 'es' ? "¡Eres Libre!" : "You are Free!";
+            resEl.style.color = "var(--secondary)";
+        } else if (months >= 1200) {
+            resEl.innerText = "∞";
+            resEl.style.color = "var(--dark)";
+        } else {
+            resEl.innerText = `${yrs} ${texts[currentLang].years} & ${mths} ${texts[currentLang].months}`;
+            resEl.style.color = "var(--dark)";
+        }
 
-        updateChart(chartLabels, chartDataCap, chartDataExp);
-
-// Dentro de la función calculate(), al final:
-const fiRatio = Math.min((cap / target) * 100, 100).toFixed(1);
-document.getElementById('fi-ratio').innerText = fiRatio + "%";
-document.getElementById('target-val').innerText = target.toLocaleString() + " $";
-      
+        updateChart(chartLabels, chartDataInc, chartDataExp);
     }
 
-    function updateChart(labels, dataCap, dataExp) {
+    function updateChart(labels, dataInc, dataExp) {
+        if(!fireChart) return;
         fireChart.data.labels = labels;
-        fireChart.data.datasets[0].data = dataCap;
-        fireChart.data.datasets[0].label = texts[currentLang].chartInc;
+        fireChart.data.datasets[0].data = dataInc;
         fireChart.data.datasets[1].data = dataExp;
+        fireChart.data.datasets[0].label = texts[currentLang].chartInc;
         fireChart.data.datasets[1].label = texts[currentLang].chartExp;
-        fireChart.update();
+        fireChart.update('none'); // Update sin animaciones pesadas para fluidez
     }
 
     function setLang(lang) {
@@ -228,16 +275,30 @@ document.getElementById('target-val').innerText = target.toLocaleString() + " $"
         document.getElementById('lbl-return').innerText = t.lblReturn;
         document.getElementById('panic-btn').innerText = "⚠️ " + t.panic;
         document.getElementById('res-text').innerText = t.res;
-        document.getElementById('link-priv').innerText = t.l1 || "Privacy";
-        document.getElementById('link-legal').innerText = t.l2 || "Legal";
+        document.getElementById('lbl-target-sub').innerText = t.target;
         calculate();
     }
 
-    function applyPanic() { panic = 0.5; document.getElementById('reset-btn').style.display = 'block'; calculate(); }
-    function resetPanic() { panic = 1; document.getElementById('reset-btn').style.display = 'none'; calculate(); }
+    function applyPanic() { 
+        panic = 0.5; 
+        document.getElementById('reset-btn').style.display = 'block'; 
+        document.getElementById('panic-btn').style.background = 'var(--danger)';
+        calculate(); 
+    }
+    
+    function resetPanic() { 
+        panic = 1; 
+        document.getElementById('reset-btn').style.display = 'none'; 
+        document.getElementById('panic-btn').style.background = '#1e293b';
+        calculate(); 
+    }
 
-    initChart();
-    setLang('es');
+    // Arrancar
+    window.onload = () => {
+        initChart();
+        setLang('es');
+    };
 </script>
+
 </body>
 </html>
