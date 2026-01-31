@@ -61,6 +61,14 @@
         
         footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid #e2e8f0; font-size: 0.8rem; color: var(--gray); }
         footer a { color: var(--primary); text-decoration: none; margin: 0 10px; }
+
+
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+.stat-card { background: rgba(255,255,255,0.5); padding: 10px; border-radius: 12px; border: 1px solid rgba(37, 99, 235, 0.1); }
+.stat-label { font-size: 0.65rem; color: var(--gray); text-transform: uppercase; font-weight: 700; }
+.stat-value { font-size: 1.1rem; font-weight: 800; color: var(--primary); display: block; }
+  
+  
     </style>
 </head>
 <body>
@@ -100,10 +108,19 @@
             </div>
 
             <div class="result-box">
-                <span id="res-text">TIEMPO HASTA TU RETIRO</span>
-                <span id="fire-date">-</span>
-                <small id="target-amount"></small>
-            </div>
+    <span id="res-text">TIEMPO HASTA TU RETIRO</span>
+    <span id="fire-date">-</span>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-label">FI Ratio</span>
+            <span id="fi-ratio" class="stat-value">0%</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label" id="lbl-target-sub">Meta Total</span>
+            <span id="target-val" class="stat-value">$0</span>
+        </div>
+    </div>
+</div>
         </div>
 
         <div class="chart-container">
@@ -184,6 +201,12 @@
         document.getElementById('target-amount').innerText = `${texts[currentLang].target} ${target.toLocaleString()} $`;
 
         updateChart(chartLabels, chartDataCap, chartDataExp);
+
+// Dentro de la función calculate(), al final:
+const fiRatio = Math.min((cap / target) * 100, 100).toFixed(1);
+document.getElementById('fi-ratio').innerText = fiRatio + "%";
+document.getElementById('target-val').innerText = target.toLocaleString() + " $";
+      
     }
 
     function updateChart(labels, dataCap, dataExp) {
