@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-58PZ014PSE"></script>
 <script>
@@ -10,37 +11,38 @@
 
   gtag('config', 'G-58PZ014PSE');
 </script>
-    
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickFireCalc.io | Smart FIRE Dashboard</title>
+    
+    <title>Calculadora FIRE 2026: Logra tu Independencia Financiera | QuickFireCalc</title>
+    <meta name="description" content="Calcula cuánto necesitas para jubilarte joven con nuestra calculadora FIRE. Simulador de interés compuesto, regla del 4% y stress test de mercado.">
+    <meta name="keywords" content="calculadora FIRE, independencia financiera, jubilación anticipada, interés compuesto, libertad financiera">
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<meta name="google-site-verification" content="ViUnECd5zz6wxgKBLoxlvbjCpM4ivVEdSEWPOgipEQ8" />
     
-<style>
+    <style>
         :root { --primary: #2563eb; --secondary: #10b981; --danger: #ef4444; --dark: #0f172a; --gray: #64748b; --bg: #f8fafc; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--dark); padding: 20px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--dark); padding: 20px; line-height: 1.6; }
         .container { max-width: 1100px; margin: 0 auto; }
         
+        /* Header */
         .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); }
+        .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); text-decoration: none; }
         .lang-btn { background: white; border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 12px; cursor: pointer; font-weight: 600; }
 
-        .main-grid { display: grid; grid-template-columns: 380px 1fr; gap: 25px; }
+        /* Dashboard Grid */
+        .main-grid { display: grid; grid-template-columns: 380px 1fr; gap: 25px; margin-bottom: 40px; }
         @media (max-width: 950px) { .main-grid { grid-template-columns: 1fr; } }
 
-        .card { background: white; padding: 2rem; border-radius: 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; height: fit-content; }
-        h1 { font-size: 1.6rem; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -0.5px; }
+        .card { background: white; padding: 2rem; border-radius: 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; }
+        h1 { font-size: 1.8rem; margin-bottom: 1rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
+        .subtitle { color: var(--gray); font-size: 0.95rem; margin-bottom: 2rem; display: block; }
 
+        /* Inputs */
         .input-group { margin-bottom: 1.2rem; }
         label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.85rem; color: var(--gray); }
         .input-wrapper { position: relative; }
@@ -48,65 +50,73 @@
         input { width: 100%; padding: 0.8rem 0.8rem 0.8rem 2.5rem; border: 2px solid #f1f5f9; border-radius: 14px; font-size: 1rem; font-weight: 700; outline: none; transition: 0.3s; }
         input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.05); }
 
+        /* Buttons */
         .action-buttons { display: flex; gap: 10px; margin: 1.5rem 0; }
         .panic-btn { flex: 3; background: #1e293b; color: white; border: none; padding: 1rem; border-radius: 14px; font-weight: 800; cursor: pointer; transition: 0.3s; }
-        .panic-btn:hover { background: var(--danger); transform: translateY(-2px); }
         .reset-btn { flex: 1; display: none; background: white; color: var(--secondary); border: 2px solid var(--secondary); border-radius: 14px; font-weight: 800; cursor: pointer; }
 
+        /* Result Box */
         .result-box { background: linear-gradient(135deg, #f0f7ff 0%, #e0efff 100%); padding: 1.5rem; border-radius: 20px; text-align: center; border: 1px solid rgba(37, 99, 235, 0.1); }
-        #res-text { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
         #fire-date { font-size: 2rem; font-weight: 800; color: var(--dark); margin: 0.5rem 0; display: block; }
-        
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-        .stat-card { background: white; padding: 12px; border-radius: 14px; border: 1px solid rgba(0,0,0,0.03); }
-        .stat-label { font-size: 0.65rem; color: var(--gray); font-weight: 700; text-transform: uppercase; }
-        .stat-value { font-size: 1.1rem; font-weight: 800; color: var(--dark); display: block; }
+        .stat-card { background: white; padding: 10px; border-radius: 12px; }
+        .stat-value { font-size: 1.1rem; font-weight: 800; display: block; }
 
-        .chart-container { background: white; padding: 2rem; border-radius: 28px; border: 1px solid #f1f5f9; min-height: 500px; display: flex; flex-direction: column; }
-        canvas { flex-grow: 1; width: 100% !important; }
+        /* Chart */
+        .chart-container { background: white; padding: 2rem; border-radius: 28px; border: 1px solid #f1f5f9; min-height: 450px; }
 
-        footer { text-align: center; padding: 3rem 0; color: var(--gray); font-size: 0.9rem; }
-        footer a { color: var(--primary); text-decoration: none; font-weight: 600; margin: 0 10px; }
+        /* SEO CONTENT SECTION */
+        .seo-content { margin-top: 50px; background: white; padding: 3rem; border-radius: 28px; border: 1px solid #f1f5f9; }
+        .seo-content h2 { color: var(--dark); font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 800; }
+        .seo-content h3 { color: var(--primary); font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        .seo-content p { color: var(--gray); margin-bottom: 1.2rem; font-size: 1rem; }
+        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
+        @media (max-width: 768px) { .faq-grid { grid-template-columns: 1fr; } }
+
+        footer { text-align: center; padding: 3rem 0; color: var(--gray); }
+        footer a { color: var(--primary); text-decoration: none; margin: 0 10px; font-weight: 600; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header-nav">
-        <div class="logo">QuickFireCalc<span style="color:var(--dark)">.io</span></div>
-        <div>
+    <header class="header-nav">
+        <a href="/" class="logo">QuickFireCalc.io</a>
+        <nav>
             <button class="lang-btn" onclick="setLang('es')">🇲🇽 ESP</button>
             <button class="lang-btn" onclick="setLang('en')">🇺🇸 ENG</button>
-        </div>
-    </div>
+        </nav>
+    </header>
 
-    <div class="main-grid">
-        <div class="card">
-            <h1 id="title">Calcula tu Libertad</h1>
+    <main class="main-grid">
+        <section class="card">
+            <h1 id="title">Calculadora de Independencia Financiera (FIRE)</h1>
+            <span class="subtitle" id="subtitle">Planifica tu jubilación anticipada con datos precisos.</span>
+            
             <div class="input-group">
                 <label id="lbl-spend">Gasto Mensual Deseado</label>
                 <div class="input-wrapper"><span>$</span><input type="number" id="spend" value="2000" oninput="calculate()"></div>
             </div>
             <div class="input-group">
-                <label id="lbl-capital">Capital Actual</label>
+                <label id="lbl-capital">Capital Inicial Actual</label>
                 <div class="input-wrapper"><span>$</span><input type="number" id="capital" value="10000" oninput="calculate()"></div>
             </div>
             <div class="input-group">
-                <label id="lbl-save">Ahorro Mensual</label>
+                <label id="lbl-save">Ahorro Mensual Extra</label>
                 <div class="input-wrapper"><span>+</span><input type="number" id="save" value="500" oninput="calculate()"></div>
             </div>
             <div class="input-group">
-                <label id="lbl-return">Rentabilidad Anual (%)</label>
+                <label id="lbl-return">Rentabilidad Anual Estimada (%)</label>
                 <div class="input-wrapper"><span>%</span><input type="number" id="return" value="7" oninput="calculate()"></div>
             </div>
 
             <div class="action-buttons">
-                <button class="panic-btn" id="panic-btn" onclick="applyPanic()">⚠️ CRASH (-50%)</button>
+                <button class="panic-btn" id="panic-btn" onclick="applyPanic()">⚠️ Simular Crash Mercado</button>
                 <button class="reset-btn" id="reset-btn" onclick="resetPanic()">🔄</button>
             </div>
 
             <div class="result-box">
-                <span id="res-text">TIEMPO HASTA TU RETIRO</span>
+                <span id="res-text">AÑOS PARA TU LIBERTAD</span>
                 <span id="fire-date">-</span>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -114,23 +124,44 @@
                         <span id="fi-ratio" class="stat-value">0%</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-label" id="lbl-target-sub">Meta Total</span>
+                        <span class="stat-label" id="lbl-target-sub">Meta FIRE</span>
                         <span id="target-val" class="stat-value">$0</span>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section class="chart-container">
+            <canvas id="fireChart"></canvas>
+        </section>
+    </main>
+
+    <article class="seo-content" id="seo-section">
+        <h2 id="h2-main">¿Cómo funciona la Calculadora FIRE?</h2>
+        <p id="p-main">Nuestra herramienta utiliza algoritmos avanzados de interés compuesto para determinar el momento exacto en que tus inversiones pueden cubrir tus gastos de vida de forma indefinida.</p>
+        
+        <div class="faq-grid">
+            <div>
+                <h3 id="h3-1">¿Qué es la Regla del 4%?</h3>
+                <p id="p-1">Es un estándar financiero que sugiere que puedes retirar el 4% de tus ahorros anualmente sin agotar el capital, ajustándose a la inflación durante décadas.</p>
+            </div>
+            <div>
+                <h3 id="h3-2">¿Cómo influye el Interés Compuesto?</h3>
+                <p id="p-2">El interés compuesto permite que tus ahorros crezcan exponencialmente. Cuanto antes empieces a invertir, menos capital propio necesitarás aportar.</p>
+            </div>
         </div>
 
-        <div class="chart-container">
-            <canvas id="fireChart"></canvas>
-        </div>
-    </div>
+        <h3 id="h3-3">Análisis de Stress Test</h3>
+        <p id="p-3">A diferencia de otras calculadoras, QuickFireCalc permite simular una caída del 50% en el mercado (Market Crash). Esto es vital para entender la resiliencia de tu plan ante crisis económicas reales.</p>
+    </article>
 
     <footer>
-        <a href="privacy.html" id="link-priv">Privacidad</a> | 
-        <a href="legal.html" id="link-legal">Legal Notice</a> | 
-        <a href="mailto:hola@quickfirecalc.io">Contacto</a>
-        <p style="margin-top: 15px;">&copy; 2026 QuickFireCalc.io</p>
+        <nav>
+            <a href="privacy.html" id="link-priv">Política de Privacidad</a> | 
+            <a href="legal.html" id="link-legal">Aviso Legal</a> | 
+            <a href="mailto:hola@quickfirecalc.io">Contacto</a>
+        </nav>
+        <p style="margin-top: 20px;">&copy; 2026 QuickFireCalc.io - Herramientas de Inteligencia Financiera</p>
     </footer>
 </div>
 
@@ -141,16 +172,24 @@
 
     const texts = {
         es: { 
-            title: "Calcula tu Libertad", lblSpend: "Gasto Mensual Deseado", lblCapital: "Capital Actual", 
-            lblSave: "Ahorro Mensual", lblReturn: "Rentabilidad Anual (%)", panic: "CRASH DEL MERCADO", 
-            res: "TIEMPO HASTA TU RETIRO", target: "Meta Total", years: "años", months: "meses",
-            chartInc: "Ingresos Pasivos (4%)", chartExp: "Tus Gastos Anuales"
+            title: "Calculadora de Independencia Financiera (FIRE)", subtitle: "Planifica tu jubilación anticipada con datos precisos.",
+            lblSpend: "Gasto Mensual Deseado", lblCapital: "Capital Inicial Actual", 
+            lblSave: "Ahorro Mensual Extra", lblReturn: "Rentabilidad Anual Estimada (%)", panic: "Simular Crash Mercado", 
+            res: "AÑOS PARA TU LIBERTAD", target: "Meta FIRE", years: "años", months: "meses",
+            h2main: "¿Cómo funciona la Calculadora FIRE?", pmain: "Nuestra herramienta utiliza algoritmos de interés compuesto para determinar el momento de tu libertad financiera.",
+            h3_1: "¿Qué es la Regla del 4%?", p1: "El estándar para retirar fondos sin agotar tu capital.",
+            h3_2: "¿Cómo influye el Interés Compuesto?", p2: "Permite que tus ahorros crezcan exponencialmente con el tiempo.",
+            h3_3: "Análisis de Stress Test", p3: "Simula caídas del 50% para probar la resistencia de tu estrategia."
         },
         en: { 
-            title: "Plan your Freedom", lblSpend: "Monthly Spending", lblCapital: "Current Capital", 
-            lblSave: "Monthly Savings", lblReturn: "Annual Return (%)", panic: "MARKET CRASH", 
-            res: "TIME TO RETIRE", target: "Total Target", years: "years", months: "months",
-            chartInc: "Passive Income (4%)", chartExp: "Annual Expenses"
+            title: "Financial Independence Calculator (FIRE)", subtitle: "Plan your early retirement with high-precision data.",
+            lblSpend: "Monthly Desired Spending", lblCapital: "Current Initial Capital", 
+            lblSave: "Extra Monthly Savings", lblReturn: "Estimated Annual Return (%)", panic: "Simulate Market Crash", 
+            res: "YEARS TO FREEDOM", target: "FIRE Target", years: "years", months: "months",
+            h2main: "How the FIRE Calculator Works", pmain: "Our tool uses compound interest algorithms to determine the exact moment of your financial freedom.",
+            h3_1: "What is the 4% Rule?", p1: "The academic standard for safe withdrawal rates.",
+            h3_2: "Compound Interest Power", p2: "It allows your savings to grow exponentially over the long term.",
+            h3_3: "Stress Test Analysis", p3: "Simulate 50% market drops to test your plan's resilience."
         }
     };
 
@@ -161,38 +200,11 @@
             data: {
                 labels: [],
                 datasets: [
-                    { 
-                        label: texts[currentLang].chartInc, 
-                        data: [], 
-                        borderColor: '#2563eb', 
-                        backgroundColor: 'rgba(37, 99, 235, 0.1)', 
-                        fill: true, 
-                        tension: 0.4,
-                        borderWidth: 3,
-                        pointRadius: 0
-                    },
-                    { 
-                        label: texts[currentLang].chartExp, 
-                        data: [], 
-                        borderColor: '#ef4444', 
-                        borderDash: [5, 5], 
-                        fill: false,
-                        borderWidth: 2,
-                        pointRadius: 0
-                    }
+                    { label: 'Passive Income', data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.1)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 0 },
+                    { label: 'Expenses', data: [], borderColor: '#ef4444', borderDash: [5, 5], fill: false, borderWidth: 2, pointRadius: 0 }
                 ]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: { intersect: false, mode: 'index' },
-                plugins: {
-                    legend: { position: 'top', labels: { font: { family: 'Plus Jakarta Sans', weight: '600' } } }
-                },
-                scales: {
-                    y: { beginAtZero: true, ticks: { callback: value => '$' + value.toLocaleString() } }
-                }
-            }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true } } }
         });
     }
 
@@ -206,69 +218,35 @@
         const monthlyRate = annualRate / 12;
         const target = spendAnnual * 25;
 
-        // Métricas rápidas
-        const fiRatio = target > 0 ? Math.min((cap / target) * 100, 100).toFixed(1) : 0;
-        document.getElementById('fi-ratio').innerText = fiRatio + "%";
+        document.getElementById('fi-ratio').innerText = target > 0 ? Math.min((cap / target) * 100, 100).toFixed(1) + "%" : "0%";
         document.getElementById('target-val').innerText = "$" + target.toLocaleString();
 
-        // Datos para el gráfico (simulación 40 años)
-        let chartLabels = [];
-        let chartDataInc = [];
-        let chartDataExp = [];
-        let tempCap = cap;
-
+        let labels = []; let dInc = []; let dExp = []; let tCap = cap;
         for (let y = 0; y <= 40; y++) {
-            chartLabels.push(y);
-            chartDataExp.push(spendAnnual);
-            chartDataInc.push(Math.round(tempCap * 0.04));
-            
-            for(let m = 0; m < 12; m++) {
-                tempCap = (tempCap + save) * (1 + monthlyRate);
-            }
+            labels.push(y); dExp.push(spendAnnual); dInc.push(Math.round(tCap * 0.04));
+            for(let m = 0; m < 12; m++) tCap = (tCap + save) * (1 + monthlyRate);
         }
 
-        // Tiempo exacto
-        let months = 0;
-        let calcCap = cap;
-        if ((save * 12 + (calcCap * annualRate)) > 0) {
-            while(calcCap < target && months < 1200) {
-                calcCap = (calcCap + save) * (1 + monthlyRate);
-                months++;
-            }
+        let months = 0; let cCap = cap;
+        if ((save * 12 + (cCap * annualRate)) > 0) {
+            while(cCap < target && months < 1200) { cCap = (cCap + save) * (1 + monthlyRate); months++; }
         }
 
-        const yrs = Math.floor(months / 12);
-        const mths = months % 12;
-        const resEl = document.getElementById('fire-date');
+        const yrs = Math.floor(months / 12); const mths = months % 12;
+        document.getElementById('fire-date').innerText = cap >= target ? (currentLang === 'es' ? "¡Libre!" : "Free!") : (months >= 1200 ? "∞" : `${yrs} ${texts[currentLang].years} & ${mths} ${texts[currentLang].months}`);
         
-        if (cap >= target) {
-            resEl.innerText = currentLang === 'es' ? "¡Eres Libre!" : "You are Free!";
-            resEl.style.color = "var(--secondary)";
-        } else if (months >= 1200) {
-            resEl.innerText = "∞";
-            resEl.style.color = "var(--dark)";
-        } else {
-            resEl.innerText = `${yrs} ${texts[currentLang].years} & ${mths} ${texts[currentLang].months}`;
-            resEl.style.color = "var(--dark)";
+        if(fireChart) {
+            fireChart.data.labels = labels;
+            fireChart.data.datasets[0].data = dInc;
+            fireChart.data.datasets[1].data = dExp;
+            fireChart.update('none');
         }
-
-        updateChart(chartLabels, chartDataInc, chartDataExp);
-    }
-
-    function updateChart(labels, dataInc, dataExp) {
-        if(!fireChart) return;
-        fireChart.data.labels = labels;
-        fireChart.data.datasets[0].data = dataInc;
-        fireChart.data.datasets[1].data = dataExp;
-        fireChart.data.datasets[0].label = texts[currentLang].chartInc;
-        fireChart.data.datasets[1].label = texts[currentLang].chartExp;
-        fireChart.update('none'); // Update sin animaciones pesadas para fluidez
     }
 
     function setLang(lang) {
-        currentLang = lang;
-        const t = texts[lang];
+        currentLang = lang; const t = texts[lang];
         document.getElementById('title').innerText = t.title;
+        document.getElementById('subtitle').innerText = t.subtitle;
         document.getElementById('lbl-spend').innerText = t.lblSpend;
         document.getElementById('lbl-capital').innerText = t.lblCapital;
         document.getElementById('lbl-save').innerText = t.lblSave;
@@ -276,29 +254,21 @@
         document.getElementById('panic-btn').innerText = "⚠️ " + t.panic;
         document.getElementById('res-text').innerText = t.res;
         document.getElementById('lbl-target-sub').innerText = t.target;
+        document.getElementById('h2-main').innerText = t.h2main;
+        document.getElementById('p-main').innerText = t.pmain;
+        document.getElementById('h3-1').innerText = t.h3_1;
+        document.getElementById('p-1').innerText = t.p1;
+        document.getElementById('h3-2').innerText = t.h3_2;
+        document.getElementById('p-2').innerText = t.p2;
+        document.getElementById('h3-3').innerText = t.h3_3;
+        document.getElementById('p-3').innerText = t.p3;
         calculate();
     }
 
-    function applyPanic() { 
-        panic = 0.5; 
-        document.getElementById('reset-btn').style.display = 'block'; 
-        document.getElementById('panic-btn').style.background = 'var(--danger)';
-        calculate(); 
-    }
-    
-    function resetPanic() { 
-        panic = 1; 
-        document.getElementById('reset-btn').style.display = 'none'; 
-        document.getElementById('panic-btn').style.background = '#1e293b';
-        calculate(); 
-    }
+    function applyPanic() { panic = 0.5; document.getElementById('reset-btn').style.display = 'block'; calculate(); }
+    function resetPanic() { panic = 1; document.getElementById('reset-btn').style.display = 'none'; calculate(); }
 
-    // Arrancar
-    window.onload = () => {
-        initChart();
-        setLang('es');
-    };
+    window.onload = () => { initChart(); setLang('es'); };
 </script>
-
 </body>
 </html>
