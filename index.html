@@ -14,109 +14,116 @@
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Calculadora FIRE 2026: Logra tu Independencia Financiera | QuickFireCalc</title>
-    <meta name="description" content="Calcula cuánto necesitas para jubilarte joven con nuestra calculadora FIRE. Simulador de interés compuesto, regla del 4% y stress test de mercado.">
-    <meta name="keywords" content="calculadora FIRE, independencia financiera, jubilación anticipada, interés compuesto, libertad financiera">
+    <title>Calculadora FIRE 2026: Plan de Independencia Financiera | QuickFireCalc</title>
+    <meta name="description" content="La herramienta definitiva para calcular tu libertad financiera. Simulación de interés compuesto, regla del 4% y guía completa de inversión pasiva.">
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    
+
     <style>
         :root { --primary: #2563eb; --secondary: #10b981; --danger: #ef4444; --dark: #0f172a; --gray: #64748b; --bg: #f8fafc; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--dark); padding: 20px; line-height: 1.6; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--dark); padding: 20px; line-height: 1.7; }
         .container { max-width: 1100px; margin: 0 auto; }
         
-        /* Header */
-        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); text-decoration: none; }
-        .lang-btn { background: white; border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 12px; cursor: pointer; font-weight: 600; }
-
-        /* Dashboard Grid */
-        .main-grid { display: grid; grid-template-columns: 380px 1fr; gap: 25px; margin-bottom: 40px; }
+        /* Layout */
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding: 10px 0; }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .nav-links a { margin-left: 20px; text-decoration: none; color: var(--gray); font-weight: 600; font-size: 0.9rem; }
+        
+        .main-grid { display: grid; grid-template-columns: 380px 1fr; gap: 30px; margin-bottom: 40px; }
         @media (max-width: 950px) { .main-grid { grid-template-columns: 1fr; } }
 
-        .card { background: white; padding: 2rem; border-radius: 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; }
-        h1 { font-size: 1.8rem; margin-bottom: 1rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
-        .subtitle { color: var(--gray); font-size: 0.95rem; margin-bottom: 2rem; display: block; }
+        .card { background: white; padding: 2rem; border-radius: 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; position: sticky; top: 20px; }
+        h1 { font-size: 1.8rem; margin-bottom: 0.5rem; font-weight: 800; letter-spacing: -0.5px; }
 
         /* Inputs */
         .input-group { margin-bottom: 1.2rem; }
         label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.85rem; color: var(--gray); }
         .input-wrapper { position: relative; }
         .input-wrapper span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); font-weight: 700; }
-        input { width: 100%; padding: 0.8rem 0.8rem 0.8rem 2.5rem; border: 2px solid #f1f5f9; border-radius: 14px; font-size: 1rem; font-weight: 700; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.05); }
+        input { width: 100%; padding: 0.8rem 0.8rem 0.8rem 2.5rem; border: 2px solid #f1f5f9; border-radius: 14px; font-size: 1.1rem; font-weight: 700; outline: none; transition: 0.3s; background: #fafbfc; }
+        input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.05); }
 
         /* Buttons */
         .action-buttons { display: flex; gap: 10px; margin: 1.5rem 0; }
         .panic-btn { flex: 3; background: #1e293b; color: white; border: none; padding: 1rem; border-radius: 14px; font-weight: 800; cursor: pointer; transition: 0.3s; }
-        .reset-btn { flex: 1; display: none; background: white; color: var(--secondary); border: 2px solid var(--secondary); border-radius: 14px; font-weight: 800; cursor: pointer; }
+        .reset-btn { flex: 1; display: none; background: white; color: var(--secondary); border: 2px solid var(--secondary); border-radius: 14px; font-weight: 800; cursor: pointer; display: none; align-items: center; justify-content: center; }
 
-        /* Result Box */
-        .result-box { background: linear-gradient(135deg, #f0f7ff 0%, #e0efff 100%); padding: 1.5rem; border-radius: 20px; text-align: center; border: 1px solid rgba(37, 99, 235, 0.1); }
-        #fire-date { font-size: 2rem; font-weight: 800; color: var(--dark); margin: 0.5rem 0; display: block; }
+        /* Results */
+        .result-box { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 1.8rem; border-radius: 24px; text-align: center; color: white; }
+        #fire-date { font-size: 2.2rem; font-weight: 800; margin: 0.5rem 0; display: block; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-        .stat-card { background: white; padding: 10px; border-radius: 12px; }
+        .stat-card { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 14px; backdrop-filter: blur(5px); }
+        .stat-label { font-size: 0.65rem; text-transform: uppercase; opacity: 0.8; font-weight: 700; }
         .stat-value { font-size: 1.1rem; font-weight: 800; display: block; }
 
-        /* Chart */
-        .chart-container { background: white; padding: 2rem; border-radius: 28px; border: 1px solid #f1f5f9; min-height: 450px; }
+        /* Content & Ads */
+        .chart-container { background: white; padding: 2rem; border-radius: 28px; border: 1px solid #f1f5f9; min-height: 500px; margin-bottom: 20px; }
+        .ad-placeholder { background: #f1f5f9; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 20px; text-align: center; color: var(--gray); font-size: 0.8rem; margin: 20px 0; }
 
-        /* SEO CONTENT SECTION */
-        .seo-content { margin-top: 50px; background: white; padding: 3rem; border-radius: 28px; border: 1px solid #f1f5f9; }
-        .seo-content h2 { color: var(--dark); font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 800; }
-        .seo-content h3 { color: var(--primary); font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
-        .seo-content p { color: var(--gray); margin-bottom: 1.2rem; font-size: 1rem; }
-        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
-        @media (max-width: 768px) { .faq-grid { grid-template-columns: 1fr; } }
+        .seo-article { background: white; padding: 3.5rem; border-radius: 32px; border: 1px solid #f1f5f9; margin-top: 20px; }
+        .seo-article h2 { font-size: 1.8rem; margin: 2rem 0 1rem; font-weight: 800; color: var(--dark); }
+        .seo-article h3 { font-size: 1.3rem; margin: 1.5rem 0 1rem; font-weight: 700; color: var(--primary); }
+        .seo-article p { margin-bottom: 1.5rem; color: #475569; font-size: 1.05rem; }
+        .highlight-box { background: #f8fafc; border-left: 4px solid var(--primary); padding: 20px; margin: 2rem 0; border-radius: 0 16px 16px 0; }
 
-        footer { text-align: center; padding: 3rem 0; color: var(--gray); }
-        footer a { color: var(--primary); text-decoration: none; margin: 0 10px; font-weight: 600; }
+        /* Cookie Banner */
+        #cookie-banner { position: fixed; bottom: 20px; left: 20px; right: 20px; background: var(--dark); color: white; padding: 20px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .cookie-btn { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: 700; }
+
+        footer { text-align: center; padding: 4rem 0; border-top: 1px solid #e2e8f0; margin-top: 4rem; }
     </style>
 </head>
 <body>
 
+<div id="cookie-banner">
+    <p style="font-size: 0.85rem; max-width: 800px;">Utilizamos cookies propias y de terceros para mejorar tu experiencia y mostrar publicidad relacionada con tus preferencias mediante el análisis de tus hábitos de navegación. <a href="privacy.html" style="color: var(--secondary);">Leer más</a></p>
+    <button class="cookie-btn" onclick="acceptCookies()">Aceptar</button>
+</div>
+
 <div class="container">
     <header class="header-nav">
-        <a href="/" class="logo">QuickFireCalc.io</a>
-        <nav>
-            <button class="lang-btn" onclick="setLang('es')">🇲🇽 ESP</button>
-            <button class="lang-btn" onclick="setLang('en')">🇺🇸 ENG</button>
+        <a href="/" class="logo">🚀 QuickFireCalc<span style="color:var(--dark)">.io</span></a>
+        <nav class="nav-links">
+            <a href="#guia">Guía FIRE</a>
+            <a href="mailto:hola@quickfirecalc.io">Contacto</a>
+            <button class="lang-btn" style="margin-left:20px" onclick="setLang('en')">🇺🇸 EN</button>
         </nav>
     </header>
 
+    <div class="ad-placeholder">Espacio Reservado para Anuncios (AdSense)</div>
+
     <main class="main-grid">
         <section class="card">
-            <h1 id="title">Calculadora de Independencia Financiera (FIRE)</h1>
-            <span class="subtitle" id="subtitle">Planifica tu jubilación anticipada con datos precisos.</span>
+            <h1 id="title">Calculadora de Libertad Financiera</h1>
+            <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 1.5rem;">Simulador avanzado de jubilación anticipada (Movimiento FIRE).</p>
             
             <div class="input-group">
                 <label id="lbl-spend">Gasto Mensual Deseado</label>
                 <div class="input-wrapper"><span>$</span><input type="number" id="spend" value="2000" oninput="calculate()"></div>
             </div>
             <div class="input-group">
-                <label id="lbl-capital">Capital Inicial Actual</label>
+                <label id="lbl-capital">Capital Acumulado Actual</label>
                 <div class="input-wrapper"><span>$</span><input type="number" id="capital" value="10000" oninput="calculate()"></div>
             </div>
             <div class="input-group">
-                <label id="lbl-save">Ahorro Mensual Extra</label>
+                <label id="lbl-save">Ahorro Mensual Neto</label>
                 <div class="input-wrapper"><span>+</span><input type="number" id="save" value="500" oninput="calculate()"></div>
             </div>
             <div class="input-group">
-                <label id="lbl-return">Rentabilidad Anual Estimada (%)</label>
+                <label id="lbl-return">Rentabilidad Anual (%)</label>
                 <div class="input-wrapper"><span>%</span><input type="number" id="return" value="7" oninput="calculate()"></div>
             </div>
 
             <div class="action-buttons">
-                <button class="panic-btn" id="panic-btn" onclick="applyPanic()">⚠️ Simular Crash Mercado</button>
+                <button class="panic-btn" id="panic-btn" onclick="applyPanic()">⚠️ CRASH DEL MERCADO</button>
                 <button class="reset-btn" id="reset-btn" onclick="resetPanic()">🔄</button>
             </div>
 
             <div class="result-box">
-                <span id="res-text">AÑOS PARA TU LIBERTAD</span>
+                <span id="res-text">AÑOS PARA TU RETIRO</span>
                 <span id="fire-date">-</span>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -124,61 +131,55 @@
                         <span id="fi-ratio" class="stat-value">0%</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-label" id="lbl-target-sub">Meta FIRE</span>
+                        <span class="stat-label" id="lbl-target-sub">Meta Total</span>
                         <span id="target-val" class="stat-value">$0</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="chart-container">
-            <canvas id="fireChart"></canvas>
+        <section>
+            <div class="chart-container">
+                <canvas id="fireChart"></canvas>
+            </div>
+            <div class="ad-placeholder">Espacio Publicitario Sugerido</div>
         </section>
-    </main>
+    </div>
 
-   <article class="seo-content" id="seo-section" style="text-align: left;">
-    <h2 id="h2-main" style="border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px;">Guía Maestra: Cómo alcanzar la Independencia Financiera</h2>
-    
-    <p id="p-main" style="margin-top: 20px; font-size: 1.1rem; color: #334155;">
-        La libertad financiera no es ganar la lotería; es un cálculo matemático basado en tu <b>tasa de ahorro</b> y la rentabilidad de tus inversiones. Nuestra herramienta utiliza el modelo de <b>interés compuesto exponencial</b> para proyectar el crecimiento de tu patrimonio neto.
-    </p>
-    
-    <div class="faq-grid" style="margin-top: 30px;">
-        <div style="background: #fff; padding: 20px; border-radius: 15px; border: 1px solid #edf2f7;">
-            <h3 id="h3-1">¿Qué es el Número FIRE?</h3>
-            <p id="p-1">Es la cantidad de capital que necesitas para que, aplicando la <b>Regla del 4%</b>, tus rentas cubran el 100% de tus gastos. Se calcula multiplicando tus gastos anuales por 25.</p>
-        </div>
+    <article class="seo-article" id="guia">
+        <h2>Guía Definitiva 2026: Cómo alcanzar la Independencia Financiera</h2>
+        <p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) ha dejado de ser una tendencia para convertirse en una estrategia financiera sólida para miles de ahorradores. Nuestra calculadora utiliza el modelo de <b>acumulación exponencial</b> para proyectar cuándo tus activos generarán el flujo de caja suficiente para cubrir tus gastos vitales.</p>
+
+        <h3>La Regla del 4%: El pilar del retiro seguro</h3>
+        <p>Originada en el "Estudio Trinity", la regla del 4% establece que un inversor puede retirar anualmente el 4% de su cartera de inversión (ajustado a la inflación) sin agotar el capital durante al menos 30 años. Esta cifra se basa en el rendimiento histórico de los mercados de valores y bonos.</p>
         
-        <div style="background: #fff; padding: 20px; border-radius: 15px; border: 1px solid #edf2f7;">
-            <h3 id="h3-2">El Poder del Interés Compuesto</h3>
-            <p id="p-2">Como dijo Einstein, es la octava maravilla del mundo. Al reinvertir los beneficios de tus inversiones, tu capital crece sobre sí mismo, acelerando drásticamente el gráfico de ingresos pasivos.</p>
+        <div class="highlight-box">
+            <h4>¿Qué es el Número FIRE?</h4>
+            <p>Es la cifra mágica que necesitas acumular. Se calcula multiplicando tus gastos anuales por 25. Si gastas 30.000€ al año, tu meta son 750.000€.</p>
         </div>
-    </div>
 
-    <div style="margin-top: 40px; padding: 25px; background: #1e293b; color: white; border-radius: 20px;">
-        <h3 id="h3-3" style="color: var(--secondary);">Estrategia de Stress Test: ¿Por qué simular un Crash?</h3>
-        <p id="p-3" style="color: #cbd5e1;">
-            La mayoría de las calculadoras fallan porque son demasiado optimistas. En <b>QuickFireCalc.io</b> incluimos un botón de Crash del 50% para que visualices el "peor escenario". Si tu plan FIRE sobrevive a una caída del mercado en los primeros años (Riesgo de Secuencia), entonces tu plan es realmente sólido.
-        </p>
-    </div>
+        <h3>Interés Compuesto: El motor de tu riqueza</h3>
+        <p>El interés compuesto es la acumulación de rendimientos sobre rendimientos anteriores. En esta calculadora, puedes observar cómo pequeñas aportaciones mensuales crecen de forma parabólica. La clave para maximizar este efecto es el <b>tiempo</b> y la <b>consistencia</b>.</p>
 
-    <div style="margin-top: 40px;">
-        <h3>Pasos para acelerar tu jubilación:</h3>
-        <ul style="margin-left: 20px; color: var(--gray); margin-top: 10px;">
-            <li><b>Aumenta tu Tasa de Ahorro:</b> Pasar de un 10% a un 30% puede reducir tu tiempo de trabajo en 15 años.</li>
-            <li><b>Minimiza Comisiones:</b> Fondos indexados y ETFs de bajo coste son la clave para mantener la rentabilidad neta.</li>
-            <li><b>Evita la Inflación del Estilo de Vida:</b> Mantén tus gastos estables mientras tus ingresos suben.</li>
-        </ul>
-    </div>
-</article>
-  
+        <h3>Riesgo de Secuencia de Retornos (Sequence Risk)</h3>
+        <p>Uno de los mayores peligros para un jubilado FIRE es que el mercado caiga drásticamente justo al inicio de su retiro. Es por eso que hemos incluido el botón de <b>"Market Crash"</b>. Simular una caída del 50% te ayuda a entender si tu capital inicial es lo suficientemente robusto o si necesitas un colchón de seguridad adicional (Cash Buffer).</p>
+
+        <h3>Inversión Pasiva con Fondos Indexados y ETFs</h3>
+        <p>La forma más eficiente de alimentar tu plan FIRE es mediante la inversión pasiva. Al utilizar fondos que replican índices globales (como el S&P 500 o el MSCI World), minimizas las comisiones de gestión, lo que puede suponer una diferencia de cientos de miles de euros en el largo plazo.</p>
+
+        <div class="ad-placeholder">Contenido Recomendado (Anuncios)</div>
+
+        <h3>Cómo optimizar tu Tasa de Ahorro</h3>
+        <p>Tu tasa de ahorro es el porcentaje de tus ingresos que no gastas. Si ahorras el 10%, tardas 9 años de trabajo en pagar 1 año de libertad. Si ahorras el 50%, por cada año trabajado compras un año de jubilación futura. Optimizar tus gastos fijos es la forma más rápida de acelerar el gráfico que ves en esta pantalla.</p>
+    </article>
+
     <footer>
-        <nav>
-            <a href="privacy.html" id="link-priv">Política de Privacidad</a> | 
-            <a href="legal.html" id="link-legal">Aviso Legal</a> | 
-            <a href="mailto:hola@quickfirecalc.io">Contacto</a>
-        </nav>
-        <p style="margin-top: 20px;">&copy; 2026 QuickFireCalc.io - Herramientas de Inteligencia Financiera</p>
+        <div class="nav-links" style="margin-bottom: 20px;">
+            <a href="privacy.html">Privacidad</a>
+            <a href="legal.html">Aviso Legal</a>
+            <a href="cookies.html">Política de Cookies</a>
+        </div>
+        <p>&copy; 2026 QuickFireCalc.io - Herramientas de Planificación Financiera Avanzada</p>
     </footer>
 </div>
 
@@ -188,26 +189,8 @@
     let fireChart;
 
     const texts = {
-        es: { 
-            title: "Calculadora de Independencia Financiera (FIRE)", subtitle: "Planifica tu jubilación anticipada con datos precisos.",
-            lblSpend: "Gasto Mensual Deseado", lblCapital: "Capital Inicial Actual", 
-            lblSave: "Ahorro Mensual Extra", lblReturn: "Rentabilidad Anual Estimada (%)", panic: "Simular Crash Mercado", 
-            res: "AÑOS PARA TU LIBERTAD", target: "Meta FIRE", years: "años", months: "meses",
-            h2main: "¿Cómo funciona la Calculadora FIRE?", pmain: "Nuestra herramienta utiliza algoritmos de interés compuesto para determinar el momento de tu libertad financiera.",
-            h3_1: "¿Qué es la Regla del 4%?", p1: "El estándar para retirar fondos sin agotar tu capital.",
-            h3_2: "¿Cómo influye el Interés Compuesto?", p2: "Permite que tus ahorros crezcan exponencialmente con el tiempo.",
-            h3_3: "Análisis de Stress Test", p3: "Simula caídas del 50% para probar la resistencia de tu estrategia."
-        },
-        en: { 
-            title: "Financial Independence Calculator (FIRE)", subtitle: "Plan your early retirement with high-precision data.",
-            lblSpend: "Monthly Desired Spending", lblCapital: "Current Initial Capital", 
-            lblSave: "Extra Monthly Savings", lblReturn: "Estimated Annual Return (%)", panic: "Simulate Market Crash", 
-            res: "YEARS TO FREEDOM", target: "FIRE Target", years: "years", months: "months",
-            h2main: "How the FIRE Calculator Works", pmain: "Our tool uses compound interest algorithms to determine the exact moment of your financial freedom.",
-            h3_1: "What is the 4% Rule?", p1: "The academic standard for safe withdrawal rates.",
-            h3_2: "Compound Interest Power", p2: "It allows your savings to grow exponentially over the long term.",
-            h3_3: "Stress Test Analysis", p3: "Simulate 50% market drops to test your plan's resilience."
-        }
+        es: { title: "Calculadora de Libertad Financiera", years: "años", months: "meses", target: "Meta Total", chartInc: "Ingresos Pasivos (4%)", chartExp: "Tus Gastos Anuales" },
+        en: { title: "Financial Independence Calculator", years: "years", months: "months", target: "Total Target", chartInc: "Passive Income (4%)", chartExp: "Your Annual Expenses" }
     };
 
     function initChart() {
@@ -217,19 +200,24 @@
             data: {
                 labels: [],
                 datasets: [
-                    { label: 'Passive Income', data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.1)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 0 },
-                    { label: 'Expenses', data: [], borderColor: '#ef4444', borderDash: [5, 5], fill: false, borderWidth: 2, pointRadius: 0 }
+                    { label: texts[currentLang].chartInc, data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.1)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 0 },
+                    { label: texts[currentLang].chartExp, data: [], borderColor: '#ef4444', borderDash: [5, 5], fill: false, borderWidth: 2, pointRadius: 0 }
                 ]
             },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true } } }
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { legend: { position: 'top' } },
+                scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v.toLocaleString() } } }
+            }
         });
     }
 
     function calculate() {
         const spendMonthly = parseFloat(document.getElementById('spend').value) || 0;
         const spendAnnual = spendMonthly * 12;
-        const baseCapital = parseFloat(document.getElementById('capital').value) || 0;
-        let cap = baseCapital * panic;
+        const baseCap = parseFloat(document.getElementById('capital').value) || 0;
+        let cap = baseCap * panic;
         const save = parseFloat(document.getElementById('save').value) || 0;
         const annualRate = (parseFloat(document.getElementById('return').value) || 0) / 100;
         const monthlyRate = annualRate / 12;
@@ -238,19 +226,20 @@
         document.getElementById('fi-ratio').innerText = target > 0 ? Math.min((cap / target) * 100, 100).toFixed(1) + "%" : "0%";
         document.getElementById('target-val').innerText = "$" + target.toLocaleString();
 
-        let labels = []; let dInc = []; let dExp = []; let tCap = cap;
+        let labels = [], dInc = [], dExp = [], tCap = cap;
         for (let y = 0; y <= 40; y++) {
             labels.push(y); dExp.push(spendAnnual); dInc.push(Math.round(tCap * 0.04));
             for(let m = 0; m < 12; m++) tCap = (tCap + save) * (1 + monthlyRate);
         }
 
-        let months = 0; let cCap = cap;
+        let months = 0, cCap = cap;
         if ((save * 12 + (cCap * annualRate)) > 0) {
             while(cCap < target && months < 1200) { cCap = (cCap + save) * (1 + monthlyRate); months++; }
         }
 
-        const yrs = Math.floor(months / 12); const mths = months % 12;
-        document.getElementById('fire-date').innerText = cap >= target ? (currentLang === 'es' ? "¡Libre!" : "Free!") : (months >= 1200 ? "∞" : `${yrs} ${texts[currentLang].years} & ${mths} ${texts[currentLang].months}`);
+        const yrs = Math.floor(months / 12), mths = months % 12;
+        const resEl = document.getElementById('fire-date');
+        resEl.innerText = cap >= target ? "¡LIBRE!" : (months >= 1200 ? "∞" : `${yrs} ${texts[currentLang].years} & ${mths} ${texts[currentLang].months}`);
         
         if(fireChart) {
             fireChart.data.labels = labels;
@@ -260,32 +249,17 @@
         }
     }
 
-    function setLang(lang) {
-        currentLang = lang; const t = texts[lang];
-        document.getElementById('title').innerText = t.title;
-        document.getElementById('subtitle').innerText = t.subtitle;
-        document.getElementById('lbl-spend').innerText = t.lblSpend;
-        document.getElementById('lbl-capital').innerText = t.lblCapital;
-        document.getElementById('lbl-save').innerText = t.lblSave;
-        document.getElementById('lbl-return').innerText = t.lblReturn;
-        document.getElementById('panic-btn').innerText = "⚠️ " + t.panic;
-        document.getElementById('res-text').innerText = t.res;
-        document.getElementById('lbl-target-sub').innerText = t.target;
-        document.getElementById('h2-main').innerText = t.h2main;
-        document.getElementById('p-main').innerText = t.pmain;
-        document.getElementById('h3-1').innerText = t.h3_1;
-        document.getElementById('p-1').innerText = t.p1;
-        document.getElementById('h3-2').innerText = t.h3_2;
-        document.getElementById('p-2').innerText = t.p2;
-        document.getElementById('h3-3').innerText = t.h3_3;
-        document.getElementById('p-3').innerText = t.p3;
-        calculate();
+    function acceptCookies() {
+        document.getElementById('cookie-banner').style.display = 'none';
+        localStorage.setItem('cookiesAccepted', 'true');
     }
 
-    function applyPanic() { panic = 0.5; document.getElementById('reset-btn').style.display = 'block'; calculate(); }
-    function resetPanic() { panic = 1; document.getElementById('reset-btn').style.display = 'none'; calculate(); }
-
-    window.onload = () => { initChart(); setLang('es'); };
+    window.onload = () => {
+        if(localStorage.getItem('cookiesAccepted')) document.getElementById('cookie-banner').style.display = 'none';
+        initChart();
+        calculate();
+    };
 </script>
+
 </body>
 </html>
