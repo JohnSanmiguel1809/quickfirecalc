@@ -11,6 +11,7 @@
 
   gtag('config', 'G-58PZ014PSE');
 </script>
+
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -102,4 +103,130 @@
             </div>
             <div class="input-group">
                 <label>Capital Inicial ($)</label>
-                <div class="input-wrapper"><span>$</span><input type="number" id
+                <div class="input-wrapper"><span>$</span><input type="number" id="capital" value="10000" oninput="calculate()"></div>
+            </div>
+            <div class="input-group">
+                <label>Ahorro Mensual ($)</label>
+                <div class="input-wrapper"><span>+</span><input type="number" id="save" value="500" oninput="calculate()"></div>
+            </div>
+            <div class="input-group">
+                <label>Rentabilidad (%)</label>
+                <div class="input-wrapper"><span>%</span><input type="number" id="return" value="7" oninput="calculate()"></div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="panic-btn" id="panic-btn" onclick="applyPanic()">⚠️ CRASH MERCADO</button>
+                <button class="reset-btn" id="reset-btn" onclick="resetPanic()">🔄</button>
+            </div>
+
+            <div class="result-box">
+                <span style="font-size: 0.7rem; font-weight: 800; opacity: 0.9;">TIEMPO PARA EL RETIRO</span>
+                <span id="fire-date">-</span>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-label">FI Ratio</span>
+                        <span id="fi-ratio" class="stat-value">0%</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Meta Total</span>
+                        <span id="target-val" class="stat-value">$0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="chart-container">
+            <canvas id="fireChart"></canvas>
+        </section>
+    </main>
+
+    <div class="ad-placeholder">Espacio para Publicidad</div>
+
+    <article class="seo-article">
+        <h2>¿Qué es el Movimiento FIRE?</h2>
+        <p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida.</p>
+        
+        <h3>Cómo usar este simulador</h3>
+        <p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p>
+
+        <h3>Riesgo y Volatilidad</h3>
+        <p>Los mercados no siempre suben. Por eso hemos incluido el botón <b>Market Crash</b>, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p>
+
+        <div class="ad-placeholder" style="margin-top: 20px;">Publicidad Relacionada</div>
+    </article>
+
+    <footer>
+        <a href="privacy.html">Privacidad</a> | <a href="legal.html">Aviso Legal</a> | <a href="cookies.html">Cookies</a>
+        <p style="margin-top: 15px;">&copy; 2026 QuickFireCalc.io</p>
+    </footer>
+</div>
+
+<script>
+    let panic = 1;
+    let fireChart;
+
+    function initChart() {
+        const ctx = document.getElementById('fireChart').getContext('2d');
+        fireChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                    { label: 'Ingresos Pasivos (4%)', data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.05)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 0 },
+                    { label: 'Tus Gastos Anuales', data: [], borderColor: '#ef4444', borderDash: [5, 5], fill: false, borderWidth: 2, pointRadius: 0 }
+                ]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'top', labels: { font: { weight: '600' } } } },
+                scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v.toLocaleString() } } }
+            }
+        });
+    }
+
+    function calculate() {
+        const spend = (parseFloat(document.getElementById('spend').value) || 0) * 12;
+        const baseCap = parseFloat(document.getElementById('capital').value) || 0;
+        let cap = baseCap * panic;
+        const save = parseFloat(document.getElementById('save').value) || 0;
+        const rate = (parseFloat(document.getElementById('return').value) || 0) / 100;
+        const target = spend * 25;
+
+        document.getElementById('fi-ratio').innerText = target > 0 ? Math.min((cap/target)*100, 100).toFixed(1) + "%" : "0%";
+        document.getElementById('target-val').innerText = "$" + target.toLocaleString();
+
+        let labels = [], dInc = [], dExp = [], tCap = cap;
+        for (let y = 0; y <= 40; y++) {
+            labels.push(y); dExp.push(spend); dInc.push(Math.round(tCap * 0.04));
+            for(let m = 0; m < 12; m++) tCap = (tCap + save) * (1 + (rate/12));
+        }
+
+        let months = 0, cCap = cap;
+        if ((save*12 + cCap*rate) > 0) {
+            while(cCap < target && months < 1200) { cCap = (cCap + save) * (1 + (rate/12)); months++; }
+        }
+
+        const yrs = Math.floor(months / 12), mths = months % 12;
+        document.getElementById('fire-date').innerText = cap >= target ? "¡LIBRE!" : (months >= 1200 ? "∞" : `${yrs}a ${mths}m`);
+        
+        if(fireChart) {
+            fireChart.data.labels = labels;
+            fireChart.data.datasets[0].data = dInc;
+            fireChart.data.datasets[1].data = dExp;
+            fireChart.update('none');
+        }
+    }
+
+    function applyPanic() { panic = 0.5; document.getElementById('reset-btn').style.display = 'block'; calculate(); }
+    function resetPanic() { panic = 1; document.getElementById('reset-btn').style.display = 'none'; calculate(); }
+    function acceptCookies() { document.getElementById('cookie-banner').style.display = 'none'; localStorage.setItem('fire-cookies', '1'); }
+
+    window.onload = () => {
+        if(localStorage.getItem('fire-cookies')) document.getElementById('cookie-banner').style.display = 'none';
+        initChart(); calculate();
+    };
+</script>
+
+</body>
+</html>
