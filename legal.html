@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Google tag (gtag.js) -->
+
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-58PZ014PSE"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -10,44 +11,96 @@
 
   gtag('config', 'G-58PZ014PSE');
 </script>
+
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legal Notice - Aviso Legal | QuickFireCalc.io</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>Aviso Legal | Legal Notice - QuickFireCalc.io</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58PZ014PSE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58PZ014PSE');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
     <style>
-        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #334155; max-width: 900px; margin: 0 auto; padding: 40px 20px; background: #f8fafc; }
-        .card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
-        h1 { color: #0f172a; font-size: 1.5rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 20px; }
-        h2 { color: #2563eb; margin-top: 25px; font-size: 1.1rem; }
-        .warning { background: #fff1f2; border-left: 4px solid #e11d48; padding: 15px; margin-bottom: 20px; font-size: 0.85rem; font-weight: 600; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #2563eb; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        :root { --primary: #2563eb; --secondary: #10b981; --dark: #0f172a; --gray: #64748b; --bg: #f8fafc; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--dark); line-height: 1.7; padding: 0 20px; }
+        
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        .header-nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 0; }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
+        
+        .back-link { font-size: 0.85rem; font-weight: 700; color: var(--gray); text-decoration: none; border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 10px; transition: 0.2s; background: white; }
+        .back-link:hover { background: #f1f5f9; color: var(--primary); }
+
+        .legal-card { background: white; padding: 45px; border-radius: 24px; border: 1px solid #eef2f6; box-shadow: 0 4px 20px rgba(0,0,0,0.02); margin-bottom: 40px; }
+        
+        h1 { font-size: 2rem; margin-bottom: 30px; font-weight: 800; letter-spacing: -0.5px; color: var(--dark); }
+        h2 { font-size: 1.25rem; margin: 35px 0 15px; font-weight: 800; color: var(--primary); border-left: 4px solid var(--primary); padding-left: 15px; }
+        
+        p { margin-bottom: 18px; color: #4b5563; font-size: 1rem; }
+        
+        .lang-divider { height: 2px; background: #f1f5f9; margin: 50px 0; position: relative; }
+        .lang-divider span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg); padding: 0 20px; color: var(--gray); font-weight: 800; font-size: 0.7rem; text-transform: uppercase; }
+
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid #e2e8f0; color: var(--gray); font-size: 0.85rem; }
     </style>
 </head>
 <body>
-   <div class="card">
-        <a href="index.html" class="back-link">← Home / Inicio</a>
-        
-        <div class="grid">
-            <div>
-                <h1>Aviso Legal</h1>
-                <div class="warning">No es asesoramiento financiero.</div>
-                <h2>Responsabilidad</h2>
-                <p>QuickFireCalc.io proporciona simulaciones basadas en modelos teóricos (Regla del 4%). No garantizamos resultados futuros.</p>
-                <h2>Uso de la web</h2>
-                <p>El uso de esta herramienta implica la aceptación de estos términos.</p>
-            </div>
 
-            <div>
-                <h1>Legal Notice</h1>
-                <div class="warning">Not financial advice.</div>
-                <h2>Disclaimer</h2>
-                <p>QuickFireCalc.io provides simulations based on theoretical models (4% Rule). We do not guarantee future results.</p>
-                <h2>Terms of Use</h2>
-                <p>Using this tool implies acceptance of these terms.</p>
-            </div>
-        </div>
-    </div>
+<div class="container">
+    <header class="header-nav">
+        <a href="index.html" class="logo">🚀 QuickFireCalc.io</a>
+        <a href="index.html" class="back-link">← Volver al Simulador / Back</a>
+    </header>
+
+    <main class="legal-card">
+        <section>
+            <h1>Aviso Legal</h1>
+            <p>En cumplimiento con el deber de información, se exponen a continuación los detalles del sitio web:</p>
+            
+            <h2>1. Naturaleza del Servicio</h2>
+            <p>QuickFireCalc.io es una plataforma de libre acceso con fines exclusivamente informativos y educativos. La herramienta proporciona cálculos matemáticos basados en fórmulas financieras estándar como la Regla del 4% e Interés Compuesto.</p>
+            
+            <h2>2. Exención de Responsabilidad</h2>
+            <p><strong>Importante:</strong> Los resultados mostrados por esta calculadora son estimaciones teóricas. QuickFireCalc.io no garantiza la exactitud de las proyecciones futuras, ya que los mercados financieros son inherentemente volátiles.</p>
+            <p>Este sitio no proporciona asesoramiento financiero, legal o fiscal profesional. Se recomienda encarecidamente consultar con un asesor certificado antes de tomar cualquier decisión de inversión basada en estos cálculos.</p>
+            
+            <h2>3. Propiedad Intelectual</h2>
+            <p>El código, diseño y algoritmos de este sitio son propiedad de QuickFireCalc.io. Queda prohibida la reproducción total o parcial del contenido sin autorización previa.</p>
+        </section>
+
+        <div class="lang-divider"><span>English Version</span></div>
+
+        <section>
+            <h1>Legal Notice</h1>
+            <p>In compliance with information disclosure requirements, the following details of the website are presented:</p>
+            
+            <h2>1. Nature of Service</h2>
+            <p>QuickFireCalc.io is a free-access platform intended exclusively for informational and educational purposes. The tool provides mathematical calculations based on standard financial formulas such as the 4% Rule and Compound Interest.</p>
+            
+            <h2>2. Disclaimer</h2>
+            <p><strong>Important:</strong> The results shown by this calculator are theoretical estimates. QuickFireCalc.io does not guarantee the accuracy of future projections, as financial markets are inherently volatile.</p>
+            <p>This site does not provide professional financial, legal, or tax advice. We strongly recommend consulting with a certified advisor before making any investment decisions based on these calculations.</p>
+            
+            <h2>3. Intellectual Property</h2>
+            <p>The code, design, and algorithms of this site are the property of QuickFireCalc.io. Total or partial reproduction of the content is prohibited without prior authorization.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 QuickFireCalc.io - Financial Education Tools</p>
+    </footer>
+</div>
+
 </body>
 </html>
