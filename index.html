@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-58PZ014PSE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-58PZ014PSE');
-</script>
-  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickFireCalc.io | Plan de Independencia Financiera</title>
+    <title>QuickFireCalc.io | Financial Independence Plan</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58PZ014PSE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58PZ014PSE');
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -23,104 +20,100 @@
     <style>
         :root { --primary: #2563eb; --secondary: #10b981; --danger: #ef4444; --dark: #0f172a; --gray: #64748b; --bg: #f8fafc; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--dark); line-height: 1.7; padding: 0 20px; }
         
-        /* Contenedor Maestro: Alineación Perfecta */
         .container { max-width: 1000px; margin: 0 auto; }
         
         .header-nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 0; }
         .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
         
-        /* Grid de la Calculadora */
+        .lang-switcher { display: flex; gap: 8px; }
+        .lang-btn { background: white; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.75rem; transition: 0.2s; }
+        .lang-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
         .main-grid { display: grid; grid-template-columns: 360px 1fr; gap: 20px; margin-bottom: 20px; }
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
 
         .card { background: white; padding: 25px; border-radius: 24px; border: 1px solid #eef2f6; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
-        
         h1 { font-size: 1.6rem; margin-bottom: 20px; font-weight: 800; letter-spacing: -0.5px; }
 
-        /* Estilos de Inputs */
         .input-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem; color: var(--gray); }
         .input-wrapper { position: relative; }
         .input-wrapper span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); font-weight: 700; }
         input { width: 100%; padding: 12px 12px 12px 35px; border: 2px solid #f1f5f9; border-radius: 12px; font-size: 1rem; font-weight: 700; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--primary); background: white; }
 
         .action-buttons { display: flex; gap: 10px; margin: 20px 0; }
-        .panic-btn { flex: 1; background: #1e293b; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 0.85rem; }
+        .panic-btn { flex: 1; background: #1e293b; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 0.85rem; }
         .reset-btn { background: white; color: var(--secondary); border: 2px solid var(--secondary); padding: 12px; border-radius: 12px; cursor: pointer; display: none; }
 
-        /* Resultado Azul */
         .result-box { background: var(--primary); padding: 25px; border-radius: 20px; text-align: center; color: white; }
         #fire-date { font-size: 2.2rem; font-weight: 800; display: block; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
         .stat-card { background: rgba(255,255,255,0.15); padding: 10px; border-radius: 12px; }
-        .stat-label { font-size: 0.6rem; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 2px; }
+        .stat-label { font-size: 0.6rem; text-transform: uppercase; font-weight: 700; display: block; }
 
-        /* Gráfico con misma altura que la tarjeta */
-        .chart-container { background: white; padding: 25px; border-radius: 24px; border: 1px solid #eef2f6; box-shadow: 0 4px 20px rgba(0,0,0,0.02); display: flex; flex-direction: column; height: 100%; min-height: 480px; }
+        /* Contenedor de gráfica con altura bloqueada para evitar el estiramiento */
+        .chart-container { background: white; padding: 25px; border-radius: 24px; border: 1px solid #eef2f6; position: relative; height: 480px; width: 100%; }
 
-        /* SECCIÓN SEO: Ajustada al mismo ancho que la calculadora + gráfico */
         .seo-article { background: white; padding: 40px; border-radius: 24px; border: 1px solid #eef2f6; margin-top: 10px; margin-bottom: 40px; }
         .seo-article h2 { font-size: 1.5rem; margin-bottom: 20px; font-weight: 800; }
         .seo-article h3 { font-size: 1.1rem; margin: 25px 0 10px; color: var(--primary); font-weight: 700; }
-        .seo-article p { color: #4b5563; font-size: 1rem; margin-bottom: 15px; }
 
-        .ad-placeholder { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 15px; text-align: center; color: var(--gray); font-size: 0.75rem; margin-bottom: 20px; }
+        .ad-placeholder { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 15px; text-align: center; color: var(--gray); font-size: 0.7rem; margin-bottom: 20px; text-transform: uppercase; }
 
         footer { text-align: center; padding: 40px 0; border-top: 1px solid #e2e8f0; color: var(--gray); font-size: 0.85rem; }
         footer a { color: var(--primary); text-decoration: none; font-weight: 600; margin: 0 10px; }
 
-        /* Cookie Banner */
         #cookie-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 800px; background: var(--dark); color: white; padding: 15px 25px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; z-index: 100; font-size: 0.8rem; }
-        .cookie-btn { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 700; margin-left: 15px; }
     </style>
 </head>
 <body>
 
 <div id="cookie-banner">
-    <p>Usamos cookies para mejorar tu experiencia y cumplir con AdSense. <a href="privacy.html" style="color: var(--secondary);">Info</a></p>
-    <button class="cookie-btn" onclick="acceptCookies()">Entendido</button>
+    <p id="cookie-text">Usamos cookies para mejorar tu experiencia. <a href="privacy.html" style="color: var(--secondary);">Info</a></p>
+    <button style="background:var(--primary); color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:700;" onclick="acceptCookies()">OK</button>
 </div>
 
 <div class="container">
     <header class="header-nav">
         <a href="/" class="logo">🚀 QuickFireCalc.io</a>
-        <div style="font-size: 0.8rem; font-weight: 600; color: var(--gray);">Calculadora de Independencia Financiera</div>
+        <div class="lang-switcher">
+            <button class="lang-btn" id="btn-es" onclick="switchLang('es')">ESP</button>
+            <button class="lang-btn" id="btn-en" onclick="switchLang('en')">ENG</button>
+        </div>
     </header>
 
-    <div class="ad-placeholder">Espacio para Publicidad</div>
+    <div class="ad-placeholder">Ad Space - Top</div>
 
     <main class="main-grid">
         <section class="card">
-            <h1>Libertad Financiera</h1>
+            <h1 id="txt-h1">Libertad Financiera</h1>
             
             <div class="input-group">
-                <label>Gasto Mensual ($)</label>
+                <label id="txt-label-spend">Gasto Mensual ($)</label>
                 <div class="input-wrapper"><span>$</span><input type="number" id="spend" value="2000" oninput="calculate()"></div>
             </div>
             <div class="input-group">
-                <label>Capital Inicial ($)</label>
+                <label id="txt-label-cap">Capital Inicial ($)</label>
                 <div class="input-wrapper"><span>$</span><input type="number" id="capital" value="10000" oninput="calculate()"></div>
             </div>
             <div class="input-group">
-                <label>Ahorro Mensual ($)</label>
+                <label id="txt-label-save">Ahorro Mensual ($)</label>
                 <div class="input-wrapper"><span>+</span><input type="number" id="save" value="500" oninput="calculate()"></div>
             </div>
             <div class="input-group">
-                <label>Rentabilidad (%)</label>
+                <label id="txt-label-ret">Rentabilidad (%)</label>
                 <div class="input-wrapper"><span>%</span><input type="number" id="return" value="7" oninput="calculate()"></div>
             </div>
 
             <div class="action-buttons">
-                <button class="panic-btn" id="panic-btn" onclick="applyPanic()">⚠️ CRASH MERCADO</button>
+                <button class="panic-btn" id="txt-panic" onclick="applyPanic()">⚠️ CRASH MERCADO</button>
                 <button class="reset-btn" id="reset-btn" onclick="resetPanic()">🔄</button>
             </div>
 
             <div class="result-box">
-                <span style="font-size: 0.7rem; font-weight: 800; opacity: 0.9;">TIEMPO PARA EL RETIRO</span>
+                <span id="txt-res-label" style="font-size: 0.7rem; font-weight: 800; opacity: 0.9;">TIEMPO PARA EL RETIRO</span>
                 <span id="fire-date">-</span>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -128,42 +121,55 @@
                         <span id="fi-ratio" class="stat-value">0%</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-label">Meta Total</span>
+                        <span class="stat-label" id="txt-meta-label">Meta Total</span>
                         <span id="target-val" class="stat-value">$0</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="chart-container">
-            <canvas id="fireChart"></canvas>
+        <section>
+            <div class="chart-container">
+                <canvas id="fireChart"></canvas>
+            </div>
+            <div class="ad-placeholder" style="margin-top:20px">Ad Space - Mid</div>
         </section>
     </main>
 
-    <div class="ad-placeholder">Espacio para Publicidad</div>
-
     <article class="seo-article">
-        <h2>¿Qué es el Movimiento FIRE?</h2>
-        <p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida.</p>
-        
-        <h3>Cómo usar este simulador</h3>
-        <p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p>
-
-        <h3>Riesgo y Volatilidad</h3>
-        <p>Los mercados no siempre suben. Por eso hemos incluido el botón <b>Market Crash</b>, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p>
-
-        <div class="ad-placeholder" style="margin-top: 20px;">Publicidad Relacionada</div>
+        <div id="seo-content"></div>
+        <div class="ad-placeholder" style="margin-top: 30px;">Ad Space - Bottom</div>
     </article>
 
     <footer>
-        <a href="privacy.html">Privacidad</a> | <a href="legal.html">Aviso Legal</a> | <a href="cookies.html">Cookies</a>
+        <a href="privacy.html">Privacy</a> | <a href="legal.html">Legal</a> | <a href="cookies.html">Cookies</a>
         <p style="margin-top: 15px;">&copy; 2026 QuickFireCalc.io</p>
     </footer>
 </div>
 
 <script>
     let panic = 1;
+    let currentLang = localStorage.getItem('lang') || 'es';
     let fireChart;
+
+    const translations = {
+        es: {
+            h1: "Libertad Financiera", labelSpend: "Gasto Mensual ($)", labelCap: "Capital Inicial ($)",
+            labelSave: "Ahorro Mensual ($)", labelRet: "Rentabilidad (%)", panic: "⚠️ CRASH MERCADO",
+            resLabel: "TIEMPO PARA EL RETIRO", metaLabel: "Meta Total", free: "¡LIBRE!",
+            chartInc: "Ingresos Pasivos (4%)", chartExp: "Gastos Anuales",
+            cookie: "Usamos cookies para mejorar tu experiencia. ",
+            article: `<h2>¿Qué es el Movimiento FIRE?</h2><p>El movimiento <b>FIRE</b> es una estrategia para lograr la libertad financiera mediante el ahorro y la inversión inteligente.</p><h3>Cómo usar este simulador</h3><p>Observa la intersección entre tus gastos y tus ingresos pasivos proyectados.</p><h3>Riesgo y Volatilidad</h3><p>Los mercados fluctúan; usa el botón Crash para ver el peor escenario.</p>`
+        },
+        en: {
+            h1: "Financial Freedom", labelSpend: "Monthly Spending ($)", labelCap: "Initial Capital ($)",
+            labelSave: "Monthly Savings ($)", labelRet: "Annual Return (%)", panic: "⚠️ MARKET CRASH",
+            resLabel: "TIME TO RETIRE", metaLabel: "Total Target", free: "FREE!",
+            chartInc: "Passive Income (4%)", chartExp: "Annual Expenses",
+            cookie: "We use cookies to improve your experience. ",
+            article: `<h2>What is the FIRE Movement?</h2><p>The <b>FIRE</b> movement is a strategy to achieve financial independence through aggressive saving and investing.</p><h3>How to use this tool</h3><p>Track the intersection between your annual expenses and your projected passive income.</p><h3>Risk Management</h3><p>Markets aren't linear. Use the Crash button to test your plan's resilience.</p>`
+        }
+    };
 
     function initChart() {
         const ctx = document.getElementById('fireChart').getContext('2d');
@@ -172,23 +178,18 @@
             data: {
                 labels: [],
                 datasets: [
-                    { label: 'Ingresos Pasivos (4%)', data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.05)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 0 },
-                    { label: 'Tus Gastos Anuales', data: [], borderColor: '#ef4444', borderDash: [5, 5], fill: false, borderWidth: 2, pointRadius: 0 }
+                    { label: '', data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.05)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 0 },
+                    { label: '', borderColor: '#ef4444', borderDash: [5, 5], fill: false, borderWidth: 2, pointRadius: 0 }
                 ]
             },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false,
-                plugins: { legend: { position: 'top', labels: { font: { weight: '600' } } } },
-                scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v.toLocaleString() } } }
-            }
+            options: { responsive: true, maintainAspectRatio: false }
         });
     }
 
     function calculate() {
+        const t = translations[currentLang];
         const spend = (parseFloat(document.getElementById('spend').value) || 0) * 12;
-        const baseCap = parseFloat(document.getElementById('capital').value) || 0;
-        let cap = baseCap * panic;
+        const cap = (parseFloat(document.getElementById('capital').value) || 0) * panic;
         const save = parseFloat(document.getElementById('save').value) || 0;
         const rate = (parseFloat(document.getElementById('return').value) || 0) / 100;
         const target = spend * 25;
@@ -208,14 +209,33 @@
         }
 
         const yrs = Math.floor(months / 12), mths = months % 12;
-        document.getElementById('fire-date').innerText = cap >= target ? "¡LIBRE!" : (months >= 1200 ? "∞" : `${yrs}a ${mths}m`);
+        document.getElementById('fire-date').innerText = cap >= target ? t.free : (months >= 1200 ? "∞" : `${yrs}${currentLang==='es'?'a':'y'} ${mths}m`);
         
-        if(fireChart) {
-            fireChart.data.labels = labels;
-            fireChart.data.datasets[0].data = dInc;
-            fireChart.data.datasets[1].data = dExp;
-            fireChart.update('none');
-        }
+        fireChart.data.labels = labels;
+        fireChart.data.datasets[0].data = dInc;
+        fireChart.data.datasets[0].label = t.chartInc;
+        fireChart.data.datasets[1].data = dExp;
+        fireChart.data.datasets[1].label = t.chartExp;
+        fireChart.update('none');
+    }
+
+    function switchLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        const t = translations[lang];
+        document.getElementById('txt-h1').innerText = t.h1;
+        document.getElementById('txt-label-spend').innerText = t.labelSpend;
+        document.getElementById('txt-label-cap').innerText = t.labelCap;
+        document.getElementById('txt-label-save').innerText = t.labelSave;
+        document.getElementById('txt-label-ret').innerText = t.labelRet;
+        document.getElementById('txt-panic').innerText = t.panic;
+        document.getElementById('txt-res-label').innerText = t.resLabel;
+        document.getElementById('txt-meta-label').innerText = t.metaLabel;
+        document.getElementById('seo-content').innerHTML = t.article;
+        document.getElementById('cookie-text').innerHTML = t.cookie + '<a href="privacy.html" style="color: var(--secondary);">Info</a>';
+        document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        calculate();
     }
 
     function applyPanic() { panic = 0.5; document.getElementById('reset-btn').style.display = 'block'; calculate(); }
@@ -224,9 +244,9 @@
 
     window.onload = () => {
         if(localStorage.getItem('fire-cookies')) document.getElementById('cookie-banner').style.display = 'none';
-        initChart(); calculate();
+        initChart();
+        switchLang(currentLang);
     };
 </script>
-
 </body>
 </html>
