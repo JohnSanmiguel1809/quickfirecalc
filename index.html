@@ -11,7 +11,6 @@
 
   gtag('config', 'G-58PZ014PSE');
 </script>
-
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,6 +31,7 @@
         .lang-btn { background: white; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.8rem; transition: 0.2s; }
         .lang-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 
+        /* Estructura Principal */
         .main-grid { display: grid; grid-template-columns: 360px 1fr; gap: 20px; margin-bottom: 20px; }
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
 
@@ -56,8 +56,25 @@
 
         .chart-container { background: white; padding: 25px; border-radius: 24px; border: 1px solid #eef2f6; height: 100%; min-height: 480px; }
 
+        /* SEO & Contenido */
         .seo-article { background: white; padding: 40px; border-radius: 24px; border: 1px solid #eef2f6; margin-top: 10px; margin-bottom: 40px; }
-        .ad-placeholder { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 15px; text-align: center; color: var(--gray); font-size: 0.75rem; margin-bottom: 20px; }
+        .seo-article h2 { font-size: 1.5rem; margin-bottom: 20px; font-weight: 800; }
+        .seo-article h3 { font-size: 1.1rem; margin: 25px 0 10px; color: var(--primary); font-weight: 700; }
+        .seo-article p { color: #4b5563; font-size: 1rem; margin-bottom: 15px; }
+
+        /* ESPACIOS DE PUBLICIDAD MEJORADOS */
+        .ad-placeholder { 
+            background: #f8fafc; 
+            border: 1px dashed #cbd5e1; 
+            border-radius: 12px; 
+            padding: 20px; 
+            text-align: center; 
+            color: var(--gray); 
+            font-size: 0.75rem; 
+            margin: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         footer { text-align: center; padding: 40px 0; border-top: 1px solid #e2e8f0; color: var(--gray); font-size: 0.85rem; }
         footer a { color: var(--primary); text-decoration: none; font-weight: 600; margin: 0 10px; }
@@ -76,12 +93,12 @@
     <header class="header-nav">
         <a href="/" class="logo">🚀 QuickFireCalc.io</a>
         <div class="lang-switcher">
-            <button class="lang-btn active" id="btn-es" onclick="switchLang('es')">ESP</button>
+            <button class="lang-btn" id="btn-es" onclick="switchLang('es')">ESP</button>
             <button class="lang-btn" id="btn-en" onclick="switchLang('en')">ENG</button>
         </div>
     </header>
 
-    <div class="ad-placeholder">Ad Space</div>
+    <div class="ad-placeholder">Ad Space - Top Banner</div>
 
     <main class="main-grid">
         <section class="card">
@@ -125,13 +142,20 @@
             </div>
         </section>
 
-        <section class="chart-container">
-            <canvas id="fireChart"></canvas>
+        <section>
+            <div class="chart-container">
+                <canvas id="fireChart"></canvas>
+            </div>
+            <div class="ad-placeholder">Ad Space - Mid Content</div>
         </section>
     </main>
 
-    <article class="seo-article" id="seo-content">
-        </article>
+    <article class="seo-article">
+        <div id="seo-content">
+            </div>
+        
+        <div class="ad-placeholder" style="margin-top: 30px;">Ad Space - Bottom Article</div>
+    </article>
 
     <footer>
         <a href="privacy.html">Privacy</a> | <a href="legal.html">Legal</a> | <a href="cookies.html">Cookies</a>
