@@ -16,35 +16,35 @@
         "name": "¿Qué es la regla del 4% en el movimiento FIRE?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "La regla del 4% es una fórmula extraída del Estudio Trinity que indica que puedes retirar el 4% de tus inversiones el primer año de retiro (ajustado por inflación después) con una probabilidad del 95% de que tu dinero dure más de 30 años."
+          "text": "La regla del 4% es una fórmula que indica que puedes retirar el 4% de tus inversiones el primer año de retiro (ajustado por inflación en los siguientes) con una alta probabilidad de que tu dinero dure al menos 30 años."
         }
       }, {
         "@type": "Question",
-        "name": "¿Cómo se calcula la meta de libertad financiera?",
+        "name": "¿Cómo se calcula la libertad financiera?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "La forma más rápida es multiplicar tus gastos anuales por 25. Por ejemplo, si gastas $24,000 al año, tu meta FIRE son $600,000 invertidos."
+          "text": "Se calcula multiplicando tus gastos anuales por 25. Este número es tu 'Meta FIRE', el capital necesario para vivir de tus rentas siguiendo la regla del 4%."
         }
       }, {
         "@type": "Question",
-        "name": "¿Qué papel juega la inflación en el retiro anticipado?",
+        "name": "¿Es posible retirarse joven con poco dinero?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "La inflación reduce el poder adquisitivo. Por eso, al planificar tu libertad financiera, es vital usar una tasa de rentabilidad neta (rentabilidad total menos inflación) para que tus cálculos sean realistas a largo plazo."
+          "text": "Retirarse joven requiere un enfoque agresivo en el ahorro y la inversión. No necesitas ser millonario desde el principio, sino construir un patrimonio que genere suficientes ingresos pasivos para cubrir tu costo de vida."
         }
       }, {
         "@type": "Question",
-        "name": "¿Cuál es la diferencia entre Lean FIRE y Fat FIRE?",
+        "name": "¿Qué es Fat FIRE vs Lean FIRE?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Lean FIRE se enfoca en un estilo de vida minimalista con gastos bajos (ej. menos de $40k/año), mientras que Fat FIRE busca un retiro con un presupuesto más holgado y lujos, requiriendo un capital invertido mucho mayor."
+          "text": "Lean FIRE se refiere a retirarse con un presupuesto ajustado y gastos mínimos, mientras que Fat FIRE implica un retiro con un estilo de vida más holgado y un capital invertido mucho mayor."
         }
       }, {
         "@type": "Question",
-        "name": "¿Por qué es importante el ahorro mensual en el interés compuesto?",
+        "name": "¿Cómo afecta la inflación a mi retiro?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "El ahorro mensual constante alimenta la base de capital sobre la que se aplica el interés compuesto. En las etapas iniciales, tu tasa de ahorro es más importante que la rentabilidad de la inversión."
+          "text": "La inflación reduce el poder adquisitivo con el tiempo. Por ello, es fundamental invertir en activos que históricamente superen la inflación, como acciones, y ajustar los retiros anuales según el IPC."
         }
       }]
     }
@@ -237,6 +237,9 @@
             <h3>Cómo usar este simulador</h3>
             <p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p>
             
+            <h3>Riesgo y Volatilidad</h3>
+            <p>Los mercados no siempre suben. Por eso hemos incluido el botón <b>Market Crash</b>, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p>
+
             <section class="faq-section">
                 <h3>Preguntas Frecuentes (FAQ)</h3>
                 <div class="faq-item">
@@ -267,7 +270,6 @@
 </div>
 
 <script>
-    // Se mantiene toda tu lógica de script intacta
     let panic = 1;
     let currentLang = localStorage.getItem('lang') || 'es';
     let fireChart;
@@ -280,35 +282,7 @@
             resLabel: "TIEMPO PARA EL RETIRO", metaLabel: "Meta Total", free: "¡LIBRE!",
             chartInc: "Ingresos Pasivos (4%)", chartExp: "Gastos Anuales",
             cookie: "Usamos cookies para mejorar tu experiencia. ",
-            article: `
-                <h2>¿Qué es el Movimiento FIRE?</h2>
-                <p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida.</p>
-                
-                <h3>Cómo usar este simulador</h3>
-                <p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p>
-                
-                <h3>Riesgo y Volatilidad</h3>
-                <p>Los mercados no siempre suben. Por eso hemos incluido el botón <b>Market Crash</b>, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p>
-
-                <div class="faq-section">
-                    <h3>Preguntas Frecuentes (FAQ)</h3>
-                    <div class="faq-item">
-                        <b>¿Qué es la regla del 4%?</b>
-                        <p>Es una guía para determinar cuánto puedes retirar de tus inversiones sin agotar tu capital, asumiendo un retiro de 30 años ajustado por inflación.</p>
-                    </div>
-                    <div class="faq-item">
-                        <b>¿Cómo calculo mi Meta FIRE?</b>
-                        <p>La forma más rápida es multiplicar tus gastos anuales por 25. Por ejemplo, si gastas $2,000 al mes ($24,000 al año), tu meta son $600,000.</p>
-                    </div>
-                    <div class="faq-item">
-                        <b>¿Qué papel juega la inflación?</b>
-                        <p>La inflación reduce tu poder de compra. Es vital usar una rentabilidad neta (rentabilidad estimada menos inflación) para que tus cálculos sean realistas a largo plazo.</p>
-                    </div>
-                    <div class="faq-item">
-                        <b>¿Cuál es la diferencia entre Lean FIRE y Fat FIRE?</b>
-                        <p>Lean FIRE busca un retiro minimalista con gastos bajos, mientras que Fat FIRE apunta a un estilo de vida con más lujos y un capital invertido mucho mayor.</p>
-                    </div>
-                </div>`
+            article: `<h2>¿Qué es el Movimiento FIRE?</h2><p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida.</p><h3>Cómo usar este simulador</h3><p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p><h3>Riesgo y Volatilidad</h3><p>Los mercados no siempre suben. Por eso hemos incluido el botón <b>Market Crash</b>, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p><section class="faq-section"><h3>Preguntas Frecuentes (FAQ)</h3><div class="faq-item"><b>¿Qué es la regla del 4%?</b><p>Es una guía para determinar cuánto puedes retirar de tus inversiones sin agotar tu capital, asumiendo un retiro de 30 años ajustado por inflación.</p></div><div class="faq-item"><b>¿Cómo calculo mi Meta FIRE?</b><p>La forma más rápida es multiplicar tus gastos anuales por 25. Ese es el capital necesario para ser libre financieramente.</p></div><div class="faq-item"><b>¿Qué papel juega la inflación?</b><p>La inflación reduce tu poder de compra. Es vital usar una rentabilidad neta (rentabilidad menos inflación) para que los cálculos sean realistas.</p></div><div class="faq-item"><b>¿Es mejor ahorrar más o invertir mejor?</b><p>Al principio, tu tasa de ahorro es el factor más determinante. Con el tiempo, el interés compuesto hace que la rentabilidad gane peso.</p></div></section>`
         },
         en: {
             h1: "Financial Freedom", subtitle: "Your roadmap to early retirement.",
@@ -317,42 +291,10 @@
             resLabel: "TIME TO RETIRE", metaLabel: "Total Target", free: "FREE!",
             chartInc: "Passive Income (4%)", chartExp: "Annual Expenses",
             cookie: "We use cookies to improve your experience. ",
-            article: `
-                <h2>What is the FIRE Movement?</h2>
-                <p>The <b>FIRE</b> (Financial Independence, Retire Early) movement is a strategy seeking financial freedom through aggressive saving and smart investing. Our calculator uses the <b>4% Rule</b> to determine when your assets can cover your annual expenses for life.</p>
-                
-                <h3>How to use this tool</h3>
-                <p>Enter your current monthly expenses and your available capital. You will see how <b>compound interest</b> works in your favor. The graph shows the intersection between your annual expenses (red line) and your projected passive income (blue line). When the blue line crosses the red line, you are financially free.</p>
-                
-                <h3>Risk & Volatility</h3>
-                <p>Markets don't always go up. That's why we included the <b>Market Crash</b> button, simulating a 50% drop. A solid plan must withstand these volatilities. It is highly recommended to maintain a cash cushion to avoid selling assets during market downturns.</p>
-
-                <div class="faq-section">
-                    <h3>Frequently Asked Questions (FAQ)</h3>
-                    <div class="faq-item">
-                        <b>What is the 4% rule?</b>
-                        <p>It is a guideline from the Trinity Study that suggests you can withdraw 4% of your investment portfolio in the first year of retirement (adjusted for inflation thereafter) with a 95% probability of your money lasting over 30 years.</p>
-                    </div>
-                    <div class="faq-item">
-                        <b>How do I calculate my FIRE Goal?</b>
-                        <p>The fastest way is to multiply your annual expenses by 25. For example, if you spend $2,000 per month ($24,000 per year), your target is $600,000 invested.</p>
-                    </div>
-                    <div class="faq-item">
-                        <b>What role does inflation play?</b>
-                        <p>Inflation reduces your purchasing power. It is vital to use a "real rate of return" (estimated return minus inflation) to ensure your long-term calculations remain realistic.</p>
-                    </div>
-                    <div class="faq-item">
-                        <b>What is the difference between Lean FIRE and Fat FIRE?</b>
-                        <p>Lean FIRE focuses on a minimalist lifestyle with low expenses (e.g., under $40k/year), while Fat FIRE aims for a more affluent retirement with more luxuries and a much larger invested capital.</p>
-                    </div>
-                    <div class="faq-item">
-                        <b>Why is monthly saving important for compound interest?</b>
-                        <p>Consistent monthly savings feed the capital base that compound interest acts upon. In the early stages, your savings rate is actually more critical than your investment return.</p>
-                    </div>
-                </div>`
-        }
+            article: `<h2>What is the FIRE Movement?</h2><p>The <b>FIRE</b> movement is a strategy seeking financial freedom. Our calculator uses the <b>4% rule</b>.</p><h3>How to use this tool</h3><p>Enter your current monthly expenses and your available capital. You will see how <b>compound interest</b> works in your favor.</p><h3>Risk Management</h3><p>Markets don't always go up. That's why we've included the <b>Market Crash</b> button.</p><section class="faq-section"><h3>Frequently Asked Questions (FAQ)</h3><div class="faq-item"><b>What is the 4% rule?</b><p>It is a guideline to determine how much you can withdraw from your investments without exhausting your capital.</p></div><div class="faq-item"><b>How do I calculate my FIRE Goal?</b><p>Multiply your annual expenses by 25. That's the capital needed to be financially free.</p></div></section>`
         }
     };
+
     function toggleDarkMode() {
         const body = document.getElementById('body');
         const icon = document.getElementById('theme-icon');
