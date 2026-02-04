@@ -30,12 +30,10 @@
             --card-bg: white; --text-color: var(--dark); --border-color: #eef2f6;
         }
 
-        /* Esta clase ahora manda sobre cualquier ajuste del sistema */
         body.dark-mode {
             --bg: #0f172a; --card-bg: #1e293b; --text-color: #f8fafc; --border-color: #334155; --gray: #94a3b8;
         }
 
-        /* Solo aplicamos el modo oscuro automático si el usuario NO ha elegido nada manualmente */
         @media (prefers-color-scheme: dark) {
             body:not(.light-mode):not(.manual-mode) {
                 --bg: #0f172a; --card-bg: #1e293b; --text-color: #f8fafc; --border-color: #334155; --gray: #94a3b8;
@@ -186,7 +184,14 @@
     </main>
 
     <article class="seo-article">
-        <div id="seo-content"></div>
+        <div id="seo-content">
+            <h2>¿Qué es el Movimiento FIRE?</h2>
+            <p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida.</p>
+            <h3>Cómo usar este simulador</h3>
+            <p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p>
+            <h3>Riesgo y Volatilidad</h3>
+            <p>Los mercados no siempre suben. Por eso hemos incluido el botón Market Crash, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p>
+        </div>
         <div class="ad-placeholder" style="margin-top: 30px;">AD SPACE - BOTTOM</div>
     </article>
 
