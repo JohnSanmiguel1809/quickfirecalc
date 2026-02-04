@@ -23,17 +23,19 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <style>
-        :root { 
+     :root { 
             --primary: #2563eb; --secondary: #10b981; --danger: #ef4444; --dark: #0f172a; --gray: #64748b; --bg: #f8fafc; 
             --card-bg: white; --text-color: var(--dark); --border-color: #eef2f6;
         }
 
+        /* Esta clase ahora manda sobre cualquier ajuste del sistema */
         body.dark-mode {
             --bg: #0f172a; --card-bg: #1e293b; --text-color: #f8fafc; --border-color: #334155; --gray: #94a3b8;
         }
 
+        /* Solo aplicamos el modo oscuro automático si el usuario NO ha elegido nada manualmente */
         @media (prefers-color-scheme: dark) {
-            body:not(.light-mode) {
+            body:not(.light-mode):not(.manual-mode) {
                 --bg: #0f172a; --card-bg: #1e293b; --text-color: #f8fafc; --border-color: #334155; --gray: #94a3b8;
             }
         }
