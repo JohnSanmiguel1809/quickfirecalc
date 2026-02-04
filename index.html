@@ -23,9 +23,31 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <style>
-        :root { --primary: #2563eb; --secondary: #10b981; --danger: #ef4444; --dark: #0f172a; --gray: #64748b; --bg: #f8fafc; }
+        :root { 
+            --primary: #4f46e5; 
+            --secondary: #10b981; 
+            --danger: #f43f5e; 
+            --dark: #0f172a; 
+            --gray: #64748b; 
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --border: #eef2f6;
+        }
+
+        /* Variables para MODO OSCURO */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #020617;
+                --card-bg: #1e293b;
+                --text-main: #f1f5f9;
+                --border: #334155;
+                --gray: #94a3b8;
+            }
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--dark); line-height: 1.7; padding: 0 20px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); line-height: 1.7; padding: 0 20px; transition: background 0.3s ease; }
         
         .container { max-width: 1000px; margin: 0 auto; }
         
@@ -33,15 +55,33 @@
         .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
         
         .lang-switcher { display: flex; gap: 8px; }
-        .lang-btn { background: white; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.75rem; transition: 0.2s; }
+        .lang-btn { background: var(--card-bg); border: 1px solid var(--border); color: var(--text-main); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.75rem; transition: 0.2s; }
         .lang-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 
         .main-grid { display: grid; grid-template-columns: 360px 1fr; gap: 20px; margin-bottom: 20px; }
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
 
-        .card { background: white; padding: 25px; border-radius: 24px; border: 1px solid #eef2f6; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
-        
-        /* Animación y estilo de títulos */
+        /* Tarjetas con Micro-interacciones */
+        .card { 
+            background: var(--card-bg); 
+            padding: 25px; 
+            border-radius: 24px; 
+            border: 1px solid var(--border); 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        /* Iconos Animados */
+        .icon-float { display: inline-block; animation: floating 3s ease-in-out infinite; margin-right: 8px; }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
         h1 { font-size: 1.6rem; margin-bottom: 5px; font-weight: 800; letter-spacing: -0.5px; animation: fadeInDown 0.8s ease-out; }
         .subtitle { font-size: 0.95rem; color: var(--gray); margin-bottom: 25px; font-weight: 400; animation: fadeIn 1.2s ease-in; }
 
@@ -49,40 +89,32 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .input-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem; color: var(--gray); }
         .input-wrapper { position: relative; }
         .input-wrapper span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); font-weight: 700; }
-        input { width: 100%; padding: 12px 12px 12px 35px; border: 2px solid #f1f5f9; border-radius: 12px; font-size: 1rem; font-weight: 700; outline: none; transition: 0.3s; }
+        
+        input { 
+            width: 100%; padding: 12px 12px 12px 35px; 
+            border: 2px solid var(--border); 
+            background: var(--bg);
+            color: var(--text-main);
+            border-radius: 12px; font-size: 1rem; font-weight: 700; outline: none; transition: 0.3s; 
+        }
+        input:focus { border-color: var(--primary); }
 
         .action-buttons { display: flex; gap: 10px; margin: 20px 0; }
         
-        /* Botón mejorado con Gradiente y Hover */
         .panic-btn { 
             flex: 1; 
             background: linear-gradient(135deg, #1e293b 0%, #334155 100%); 
-            color: white; 
-            border: none; 
-            padding: 14px; 
-            border-radius: 12px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            font-size: 0.85rem; 
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+            color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: all 0.3s ease;
         }
-        .panic-btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.2);
-            box-shadow: 0 6px 15px rgba(30, 41, 59, 0.3);
-        }
+        .panic-btn:hover { transform: scale(1.02); filter: brightness(1.2); }
 
-        .reset-btn { background: white; color: var(--secondary); border: 2px solid var(--secondary); padding: 12px; border-radius: 12px; cursor: pointer; display: none; }
+        .reset-btn { background: var(--card-bg); color: var(--secondary); border: 2px solid var(--secondary); padding: 12px; border-radius: 12px; cursor: pointer; display: none; }
 
         .result-box { background: var(--primary); padding: 25px; border-radius: 20px; text-align: center; color: white; }
         #fire-date { font-size: 2.2rem; font-weight: 800; display: block; }
@@ -90,18 +122,17 @@
         .stat-card { background: rgba(255,255,255,0.15); padding: 10px; border-radius: 12px; }
         .stat-label { font-size: 0.6rem; text-transform: uppercase; font-weight: 700; display: block; }
 
-        .chart-container { background: white; padding: 25px; border-radius: 24px; border: 1px solid #eef2f6; position: relative; height: 480px; width: 100%; }
+        .chart-container { background: var(--card-bg); padding: 25px; border-radius: 24px; border: 1px solid var(--border); position: relative; height: 480px; width: 100%; }
 
-        .seo-article { background: white; padding: 40px; border-radius: 24px; border: 1px solid #eef2f6; margin-top: 10px; margin-bottom: 40px; }
-        .seo-article h2 { font-size: 1.5rem; margin-bottom: 20px; font-weight: 800; }
-        .seo-article h3 { font-size: 1.1rem; margin: 25px 0 10px; color: var(--primary); font-weight: 700; }
+        .seo-article { background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid var(--border); margin-top: 10px; margin-bottom: 40px; }
+        .seo-article h3 { color: var(--primary); }
 
-        .ad-placeholder { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 15px; text-align: center; color: var(--gray); font-size: 0.7rem; margin-bottom: 20px; text-transform: uppercase; }
+        .ad-placeholder { background: var(--bg); border: 1px dashed var(--gray); border-radius: 12px; padding: 15px; text-align: center; color: var(--gray); font-size: 0.7rem; margin-bottom: 20px; text-transform: uppercase; }
 
-        footer { text-align: center; padding: 40px 0; border-top: 1px solid #e2e8f0; color: var(--gray); font-size: 0.85rem; }
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); color: var(--gray); font-size: 0.85rem; }
         footer a { color: var(--primary); text-decoration: none; font-weight: 600; margin: 0 10px; }
 
-        #cookie-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 800px; background: var(--dark); color: white; padding: 15px 25px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; z-index: 100; font-size: 0.8rem; }
+        #cookie-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 800px; background: #0f172a; color: white; padding: 15px 25px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; z-index: 100; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -124,7 +155,7 @@
 
     <main class="main-grid">
         <section class="card">
-            <h1 id="txt-h1">Libertad Financiera</h1>
+            <h1 id="txt-h1"><span class="icon-float">💰</span>Libertad Financiera</h1>
             <p id="txt-subtitle" class="subtitle">Calcula tu camino al retiro anticipado.</p>
             
             <div class="input-group">
@@ -191,39 +222,51 @@
 
     const translations = {
         es: {
-            h1: "Libertad Financiera", 
+            h1: "<span class='icon-float'>💰</span>Libertad Financiera", 
             subtitle: "Calcula tu camino al retiro anticipado.",
             labelSpend: "Gasto Mensual ($)", labelCap: "Capital Inicial ($)",
             labelSave: "Ahorro Mensual ($)", labelRet: "Rentabilidad (%)", panic: "⚠️ CRASH MERCADO",
             resLabel: "TIEMPO PARA EL RETIRO", metaLabel: "Meta Total", free: "¡LIBRE!",
             chartInc: "Ingresos Pasivos (4%)", chartExp: "Gastos Anuales",
             cookie: "Usamos cookies para mejorar tu experiencia. ",
-            article: `<h2>¿Qué es el Movimiento FIRE?</h2><p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida..</p><h3>Cómo usar este simulador</h3><p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p><h3>Riesgo y Volatilidad</h3><p>Los mercados no siempre suben. Por eso hemos incluido el botón Market Crash, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p>`
+            article: `<h2>¿Qué es el Movimiento FIRE?</h2><p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida..</p><h3>Cómo usar este simulador</h3><p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p>`
         },
         en: {
-            h1: "Financial Freedom", 
+            h1: "<span class='icon-float'>💰</span>Financial Freedom", 
             subtitle: "Plan your roadmap to early retirement.",
             labelSpend: "Monthly Spending ($)", labelCap: "Initial Capital ($)",
             labelSave: "Monthly Savings ($)", labelRet: "Annual Return (%)", panic: "⚠️ MARKET CRASH",
             resLabel: "TIME TO RETIRE", metaLabel: "Total Target", free: "FREE!",
             chartInc: "Passive Income (4%)", chartExp: "Annual Expenses",
             cookie: "We use cookies to improve your experience. ",
-            article: `<h2>What is the FIRE Movement?</h2><p>The <b>FIRE</b> movement is a strategy that seeks financial freedom through aggressive saving and smart investing. Our calculator uses the <b>4% rule</b> to determine when your assets will be able to cover your annual expenses for life.</p><h3>How to use this tool</h3><p>Enter your current monthly expenses and your available capital. You will see how <b>compound interest</b> works in your favor. The graph shows the intersection between your annual expenses (red line) and your projected passive income (blue line). When the blue line crosses the red line, you are financially free.</p><h3>Risk Management</h3><p>Markets don't always go up. That's why we've included the <b>Market Crash</b> button, which simulates a 50% drop. A solid plan should withstand such volatility. It's advisable to maintain a cash cushion to avoid selling assets during crises.</p>`
+            article: `<h2>What is the FIRE Movement?</h2><p>The <b>FIRE</b> movement is a strategy that seeks financial freedom through aggressive saving and smart investing. Our calculator uses the <b>4% rule</b> to determine when your assets will be able to cover your annual expenses for life.</p><h3>How to use this tool</h3><p>Enter your current monthly expenses and your available capital. You will see how <b>compound interest</b> works in your favor. The graph shows the intersection between your annual expenses (red line) and your projected passive income (blue line). When the blue line crosses the red line, you are financially free.</p>`
         }
     };
 
     function initChart() {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const ctx = document.getElementById('fireChart').getContext('2d');
+        
+        // Ajuste de colores del gráfico para modo oscuro
+        Chart.defaults.color = isDark ? '#94a3b8' : '#64748b';
+
         fireChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: [],
                 datasets: [
-                    { label: '', data: [], borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.05)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 0 },
-                    { label: '', borderColor: '#ef4444', borderDash: [5, 5], fill: false, borderWidth: 2, pointRadius: 0 }
+                    { label: '', data: [], borderColor: '#4f46e5', backgroundColor: 'rgba(79, 70, 229, 0.1)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 0 },
+                    { label: '', borderColor: '#f43f5e', borderDash: [5, 5], fill: false, borderWidth: 2, pointRadius: 0 }
                 ]
             },
-            options: { responsive: true, maintainAspectRatio: false }
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false,
+                scales: {
+                    y: { grid: { color: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)' } },
+                    x: { grid: { display: false } }
+                }
+            }
         });
     }
 
@@ -264,7 +307,7 @@
         currentLang = lang;
         localStorage.setItem('lang', lang);
         const t = translations[lang];
-        document.getElementById('txt-h1').innerText = t.h1;
+        document.getElementById('txt-h1').innerHTML = t.h1;
         document.getElementById('txt-subtitle').innerText = t.subtitle;
         document.getElementById('txt-label-spend').innerText = t.labelSpend;
         document.getElementById('txt-label-cap').innerText = t.labelCap;
@@ -272,7 +315,7 @@
         document.getElementById('txt-label-ret').innerText = t.labelRet;
         document.getElementById('txt-panic').innerText = t.panic;
         document.getElementById('txt-res-label').innerText = t.resLabel;
-        document.getElementById('txt-meta-label').innerText = t.metaLabel;
+        document.getElementById('txt-meta-label').innerHTML = `<span class='icon-float'>🎯</span>${t.metaLabel}`;
         document.getElementById('seo-content').innerHTML = t.article;
         document.getElementById('cookie-text').innerHTML = t.cookie + '<a href="privacy.html" style="color: var(--secondary);">Info</a>';
         document.getElementById('btn-es').classList.toggle('active', lang === 'es');
