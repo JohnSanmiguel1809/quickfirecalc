@@ -13,7 +13,7 @@
       gtag('config', 'G-58PZ014PSE');
     </script>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3260754461974066"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3260754461974066"
      crossorigin="anonymous"></script>
 
     <meta name="google-adsense-account" content="ca-pub-3260754461974066">
@@ -40,7 +40,19 @@
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
 
         .card { background: white; padding: 25px; border-radius: 24px; border: 1px solid #eef2f6; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
-        h1 { font-size: 1.6rem; margin-bottom: 20px; font-weight: 800; letter-spacing: -0.5px; }
+        
+        /* Animación y estilo de títulos */
+        h1 { font-size: 1.6rem; margin-bottom: 5px; font-weight: 800; letter-spacing: -0.5px; animation: fadeInDown 0.8s ease-out; }
+        .subtitle { font-size: 0.95rem; color: var(--gray); margin-bottom: 25px; font-weight: 400; animation: fadeIn 1.2s ease-in; }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
         .input-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem; color: var(--gray); }
@@ -49,7 +61,27 @@
         input { width: 100%; padding: 12px 12px 12px 35px; border: 2px solid #f1f5f9; border-radius: 12px; font-size: 1rem; font-weight: 700; outline: none; transition: 0.3s; }
 
         .action-buttons { display: flex; gap: 10px; margin: 20px 0; }
-        .panic-btn { flex: 1; background: #1e293b; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 0.85rem; }
+        
+        /* Botón mejorado con Gradiente y Hover */
+        .panic-btn { 
+            flex: 1; 
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%); 
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 12px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            font-size: 0.85rem; 
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+        }
+        .panic-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.2);
+            box-shadow: 0 6px 15px rgba(30, 41, 59, 0.3);
+        }
+
         .reset-btn { background: white; color: var(--secondary); border: 2px solid var(--secondary); padding: 12px; border-radius: 12px; cursor: pointer; display: none; }
 
         .result-box { background: var(--primary); padding: 25px; border-radius: 20px; text-align: center; color: white; }
@@ -58,7 +90,6 @@
         .stat-card { background: rgba(255,255,255,0.15); padding: 10px; border-radius: 12px; }
         .stat-label { font-size: 0.6rem; text-transform: uppercase; font-weight: 700; display: block; }
 
-        /* Contenedor de gráfica con altura bloqueada para evitar el estiramiento */
         .chart-container { background: white; padding: 25px; border-radius: 24px; border: 1px solid #eef2f6; position: relative; height: 480px; width: 100%; }
 
         .seo-article { background: white; padding: 40px; border-radius: 24px; border: 1px solid #eef2f6; margin-top: 10px; margin-bottom: 40px; }
@@ -94,6 +125,7 @@
     <main class="main-grid">
         <section class="card">
             <h1 id="txt-h1">Libertad Financiera</h1>
+            <p id="txt-subtitle" class="subtitle">Calcula tu camino al retiro anticipado.</p>
             
             <div class="input-group">
                 <label id="txt-label-spend">Gasto Mensual ($)</label>
@@ -159,7 +191,9 @@
 
     const translations = {
         es: {
-            h1: "Libertad Financiera", labelSpend: "Gasto Mensual ($)", labelCap: "Capital Inicial ($)",
+            h1: "Libertad Financiera", 
+            subtitle: "Calcula tu camino al retiro anticipado.",
+            labelSpend: "Gasto Mensual ($)", labelCap: "Capital Inicial ($)",
             labelSave: "Ahorro Mensual ($)", labelRet: "Rentabilidad (%)", panic: "⚠️ CRASH MERCADO",
             resLabel: "TIEMPO PARA EL RETIRO", metaLabel: "Meta Total", free: "¡LIBRE!",
             chartInc: "Ingresos Pasivos (4%)", chartExp: "Gastos Anuales",
@@ -167,7 +201,9 @@
             article: `<h2>¿Qué es el Movimiento FIRE?</h2><p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida..</p><h3>Cómo usar este simulador</h3><p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p><h3>Riesgo y Volatilidad</h3><p>Los mercados no siempre suben. Por eso hemos incluido el botón Market Crash, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p>`
         },
         en: {
-            h1: "Financial Freedom", labelSpend: "Monthly Spending ($)", labelCap: "Initial Capital ($)",
+            h1: "Financial Freedom", 
+            subtitle: "Plan your roadmap to early retirement.",
+            labelSpend: "Monthly Spending ($)", labelCap: "Initial Capital ($)",
             labelSave: "Monthly Savings ($)", labelRet: "Annual Return (%)", panic: "⚠️ MARKET CRASH",
             resLabel: "TIME TO RETIRE", metaLabel: "Total Target", free: "FREE!",
             chartInc: "Passive Income (4%)", chartExp: "Annual Expenses",
@@ -229,6 +265,7 @@
         localStorage.setItem('lang', lang);
         const t = translations[lang];
         document.getElementById('txt-h1').innerText = t.h1;
+        document.getElementById('txt-subtitle').innerText = t.subtitle;
         document.getElementById('txt-label-spend').innerText = t.labelSpend;
         document.getElementById('txt-label-cap').innerText = t.labelCap;
         document.getElementById('txt-label-save').innerText = t.labelSave;
