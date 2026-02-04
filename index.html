@@ -7,6 +7,35 @@
 
     <link rel="canonical" href="https://quickfirecalc.io/" />
     
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "¿Qué es la regla del 4% en el movimiento FIRE?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La regla del 4% es una fórmula que indica que puedes retirar el 4% de tus inversiones el primer año de retiro (ajustado por inflación en los siguientes) con una alta probabilidad de que tu dinero dure al menos 30 años."
+        }
+      }, {
+        "@type": "Question",
+        "name": "¿Cómo se calcula la libertad financiera?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Se calcula multiplicando tus gastos anuales por 25. Este número es tu 'Meta FIRE', el capital necesario para vivir de tus rentas siguiendo la regla del 4%."
+        }
+      }, {
+        "@type": "Question",
+        "name": "¿Es posible retirarse joven con poco dinero?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Retirarse joven requiere un enfoque agresivo en el ahorro y la inversión. Cuanto antes empieces a aprovechar el interés compuesto y reduzcas tus gastos, más rápido alcanzarás la independencia financiera."
+        }
+      }]
+    }
+    </script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-58PZ014PSE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -100,6 +129,9 @@
         .seo-article { background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid var(--border-color); margin-top: 10px; margin-bottom: 40px; }
         .seo-article h2 { font-size: 1.5rem; margin-bottom: 20px; font-weight: 800; }
         .seo-article h3 { font-size: 1.1rem; margin: 25px 0 10px; color: var(--primary); font-weight: 700; }
+        .faq-section { margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .faq-item { margin-bottom: 20px; }
+        .faq-item b { display: block; color: var(--primary); margin-bottom: 5px; }
 
         .ad-placeholder { background: var(--bg); border: 1px dashed var(--gray); border-radius: 12px; padding: 15px; text-align: center; color: var(--gray); font-size: 0.7rem; margin-bottom: 20px; text-transform: uppercase; }
 
@@ -187,10 +219,21 @@
         <div id="seo-content">
             <h2>¿Qué es el Movimiento FIRE?</h2>
             <p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida.</p>
+            
             <h3>Cómo usar este simulador</h3>
             <p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p>
-            <h3>Riesgo y Volatilidad</h3>
-            <p>Los mercados no siempre suben. Por eso hemos incluido el botón Market Crash, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p>
+            
+            <section class="faq-section">
+                <h3>Preguntas Frecuentes (FAQ)</h3>
+                <div class="faq-item">
+                    <b>¿Qué es la regla del 4%?</b>
+                    <p>Es una guía para determinar cuánto puedes retirar de tus inversiones sin agotar tu capital, asumiendo un retiro de 30 años.</p>
+                </div>
+                <div class="faq-item">
+                    <b>¿Cómo calculo mi Meta FIRE?</b>
+                    <p>Multiplica tus gastos anuales por 25. Ese es el capital necesario para ser libre financieramente.</p>
+                </div>
+            </section>
         </div>
         <div class="ad-placeholder" style="margin-top: 30px;">AD SPACE - BOTTOM</div>
     </article>
@@ -214,7 +257,7 @@
             resLabel: "TIEMPO PARA EL RETIRO", metaLabel: "Meta Total", free: "¡LIBRE!",
             chartInc: "Ingresos Pasivos (4%)", chartExp: "Gastos Anuales",
             cookie: "Usamos cookies para mejorar tu experiencia. ",
-            article: `<h2>¿Qué es el Movimiento FIRE?</h2><p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida..</p><h3>Cómo usar este simulador</h3><p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p><h3>Riesgo y Volatilidad</h3><p>Los mercados no siempre suben. Por eso hemos incluido el botón Market Crash, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p>`
+            article: `<h2>¿Qué es el Movimiento FIRE?</h2><p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida..</p><h3>Cómo usar este simulador</h3><p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p><h3>Riesgo y Volatilidad</h3><p>Los mercados no siempre suben. Por eso hemos incluido el botón Market Crash, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p><section class="faq-section"><h3>Preguntas Frecuentes (FAQ)</h3><div class="faq-item"><b>¿Qué es la regla del 4%?</b><p>Es una guía para determinar cuánto puedes retirar de tus inversiones sin agotar tu capital, asumiendo un retiro de 30 años.</p></div><div class="faq-item"><b>¿Cómo calculo mi Meta FIRE?</b><p>Multiplica tus gastos anuales por 25. Ese es el capital necesario para ser libre financieramente.</p></div></section>`
         },
         en: {
             h1: "Financial Freedom", subtitle: "Your roadmap to early retirement.",
@@ -223,7 +266,7 @@
             resLabel: "TIME TO RETIRE", metaLabel: "Total Target", free: "FREE!",
             chartInc: "Passive Income (4%)", chartExp: "Annual Expenses",
             cookie: "We use cookies to improve your experience. ",
-            article: `<h2>What is the FIRE Movement?</h2><p>The <b>FIRE</b> movement is a strategy that seeks financial freedom through aggressive saving and smart investing. Our calculator uses the <b>4% rule</b> to determine when your assets will be able to cover your annual expenses for life.</p><h3>How to use this tool</h3><p>Enter your current monthly expenses and your available capital. You will see how <b>compound interest</b> works in your favor. The graph shows the intersection between your annual expenses (red line) and your projected passive income (blue line). When the blue line crosses the red line, you are financially free.</p><h3>Risk Management</h3><p>Markets don't always go up. That's why we've included the <b>Market Crash</b> button, which simulates a 50% drop. A solid plan should withstand such volatility. It's advisable to maintain a cash cushion to avoid selling assets during crises.</p>`
+            article: `<h2>What is the FIRE Movement?</h2><p>The <b>FIRE</b> movement is a strategy that seeks financial freedom through aggressive saving and smart investing. Our calculator uses the <b>4% rule</b> to determine when your assets will be able to cover your annual expenses for life.</p><h3>How to use this tool</h3><p>Enter your current monthly expenses and your available capital. You will see how <b>compound interest</b> works in your favor. The graph shows the intersection between your annual expenses (red line) and your projected passive income (blue line). When the blue line crosses the red line, you are financially free.</p><h3>Risk Management</h3><p>Markets don't always go up. That's why we've included the <b>Market Crash</b> button, which simulates a 50% drop. A solid plan should withstand such volatility. It's advisable to maintain a cash cushion to avoid selling assets during crises.</p><section class="faq-section"><h3>Frequently Asked Questions (FAQ)</h3><div class="faq-item"><b>What is the 4% rule?</b><p>It is a guideline to determine how much you can withdraw from your investments without exhausting your capital.</p></div><div class="faq-item"><b>How do I calculate my FIRE Goal?</b><p>Multiply your annual expenses by 25. That's the capital needed to be financially free.</p></div></section>`
         }
     };
 
