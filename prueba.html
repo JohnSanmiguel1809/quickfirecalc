@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlLang">
+<head>
+    <!-- AÑADIR meta description -->
+    <meta name="description" content="Free FIRE (Financial Independence, Retire Early) calculator. Plan your early retirement with our interactive simulator using the 4% rule.">
+    
+    <!-- PRELOAD fuentes críticas -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Mejorar seguridad de scripts de terceros -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58PZ014PSE" crossorigin="anonymous"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58PZ014PSE', { 'anonymize_ip': true });
+    </script>
+
+    <!-- CSS INLINE mejorado (solo cambios críticos) -->
+    <style>
+        /* AÑADIR: Estilos de foco para accesibilidad */
+        :focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+        
+        /* MEJORAR: Contraste para modo claro */
+        body:not(.dark-mode) .subtitle,
+        body:not(.dark-mode) label {
+            color: #4b5563; /* Gris más oscuro para mejor contraste */
+        }
+        
+        /* AÑADIR: Loading state para gráfico */
+        .chart-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--gray);
+        }
+        
+        /* MEJORAR: Responsive para móviles muy pequeños */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+            .card, .chart-container {
+                padding: 20px 15px;
+            }
+            .main-grid {
+                gap: 15px;
+            }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .panic-btn, .reset-btn {
+                width: 100%;
+            }
+        }
+        
+        /* AÑADIR: Soporte para reduce-motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .card:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body id="body">
+
+<!-- MEJORAR: Banner de cookies con más información -->
+<div id="cookie-banner" role="alert" aria-labelledby="cookie-heading">
+    <p id="cookie-text">We use cookies to improve your experience. <a href="privacy.html" style="color: var(--secondary);">Learn more</a></p>
+    <div>
+        <button style="background: var(--border-color); color: var(--text-color); border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; margin-right: 10px;" onclick="declineCookies()">Decline</button>
+        <button style="background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 700;" onclick="acceptCookies()">Accept</button>
+    </div>
+</div>
+
+<div class="container">
+    <header class="header-nav">
+        <!-- MEJORAR: Logo con accesibilidad -->
+        <a href="/" class="logo" aria-label="QuickFireCalc.io - FIRE Calculator">
+            <span role="img" aria-label="Rocket">🚀</span> QuickFireCalc.io
+        </a>
+        <div class="nav-controls">
+            <button class="btn-control" onclick="toggleDarkMode()" aria-label="Toggle dark mode" id="theme-btn">
+                <span id="theme-icon" role="img">🌙</span>
+            </button>
+            <div class="lang-switcher" role="group" aria-label="Language selector">
+                <button class="btn-control" id="btn-es" onclick="switchLang('es')" aria-pressed="false">ESP</button>
+                <button class="btn-control" id="btn-en" onclick="switchLang('en')" aria-pressed="true">ENG</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Resto del HTML permanece igual hasta el script -->
+
+<script>
+    // ENVOLVER en IIFE para evitar variables globales
+    (function() {
+        'use strict';
+        
+        let panic = 1;
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let fireChart;
+        let calculateTimeout = null;
+        
+        // MEJORAR: Usar dataset para traducciones o cargar async
+        const translations = {
+            en: {
+                // ... traducciones existentes ...
+            },
+            es: {
+                // ... traducciones existentes ...
+            }
+        };
+        
+        // AÑADIR: Debounce para cálculos
+        function debouncedCalculate() {
+            if (calculateTimeout) {
+                clearTimeout(calculateTimeout);
+            }
+            calculateTimeout = setTimeout(calculate, 300);
+        }
+        
+        // MODIFICAR: Input handlers
+        document.querySelectorAll('input[oninput]').forEach(input => {
+            const originalHandler = input.getAttribute('oninput');
+            input.removeAttribute('oninput');
+            input.addEventListener('input', debouncedCalculate);
+        });
+        
+        // AÑADIR: Web Worker para cálculos intensivos (opcional)
+        function calculateWithWorker() {
+            // Implementación para offload cálculos pesados
+            if (window.Worker) {
+                // Crear worker para cálculos
+            }
+        }
+        
+        // MEJORAR: toggleDarkMode con localStorage robusto
+        function toggleDarkMode() {
+            const body = document.getElementById('body');
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            const themeBtn = document.getElementById('theme-btn');
+            
+            const isDark = body.classList.toggle('dark-mode');
+            html.classList.toggle('dark-mode', isDark);
+            
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            localStorage.setItem('theme-manual', 'true');
+            
+            icon.textContent = isDark ? '☀️' : '🌙';
+            themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            
+            if(fireChart) {
+                const color = isDark ? '#94a3b8' : '#4b5563'; // Mejor contraste
+                fireChart.options.scales.x.ticks.color = color;
+                fireChart.options.scales.y.ticks.color = color;
+                fireChart.update();
+            }
+        }
+        
+        // MEJORAR: switchLang para cambiar atributo lang del HTML
+        function switchLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.getElementById('htmlLang').setAttribute('lang', lang);
+            
+            const t = translations[lang];
+            
+            // Usar textContent donde sea posible
+            document.getElementById('txt-h1').textContent = t.h1;
+            document.getElementById('txt-subtitle').textContent = t.subtitle;
+            
+            // Para contenido con HTML, usar plantillas seguras
+            updateSEOContent(t.article);
+            
+            // Actualizar atributos ARIA
+            document.getElementById('btn-es').setAttribute('aria-pressed', lang === 'es');
+            document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en');
+            
+            // Actualizar botones de idioma
+            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            
+            calculate();
+        }
+        
+        // AÑADIR: Función segura para actualizar contenido
+        function updateSEOContent(html) {
+            const container = document.getElementById('seo-content');
+            container.innerHTML = ''; // Limpiar seguro
+            
+            // Crear elemento temporal
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+            
+            // Sanitizar básico (en producción usar DOMPurify)
+            const sanitized = Array.from(temp.childNodes).map(node => {
+                if (node.nodeType === 3) { // Text node
+                    return document.createTextNode(node.textContent);
+                }
+                if (node.nodeType === 1) { // Element node
+                    const allowedTags = ['H2', 'H3', 'P', 'SECTION', 'DIV', 'B', 'A', 'SPAN'];
+                    if (allowedTags.includes(node.tagName)) {
+                        return node.cloneNode(true);
+                    }
+                }
+                return null;
+            }).filter(Boolean);
+            
+            sanitized.forEach(node => container.appendChild(node));
+        }
+        
+        // AÑADIR: Manejo de cookies completo
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            localStorage.setItem('fire-cookies', 'accepted');
+            // Aquí cargar scripts de tracking si es necesario
+        }
+        
+        function declineCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            localStorage.setItem('fire-cookies', 'declined');
+            // Deshabilitar scripts de tracking
+            window['ga-disable-G-58PZ014PSE'] = true;
+        }
+        
+        // MEJORAR: Inicialización
+        window.addEventListener('load', () => {
+            // Inicializar tema
+            const savedTheme = localStorage.getItem('theme');
+            const isManual = localStorage.getItem('theme-manual') === 'true';
+            
+            if (isManual && savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.documentElement.classList.add('dark-mode');
+                document.getElementById('theme-icon').textContent = '☀️';
+            }
+            
+            // Inicializar cookies
+            const cookiePref = localStorage.getItem('fire-cookies');
+            if (cookiePref === 'accepted' || cookiePref === 'declined') {
+                document.getElementById('cookie-banner').style.display = 'none';
+                if (cookiePref === 'declined') {
+                    window['ga-disable-G-58PZ014PSE'] = true;
+                }
+            }
+            
+            // Inicializar gráfico
+            initChart();
+            
+            // Inicializar idioma
+            switchLang(currentLang);
+            
+            // AÑADIR: Event listeners para teclado
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.getElementById('cookie-banner').style.display = 'none';
+                }
+            });
+        });
+        
+        // AÑADIR: Service Worker para offline (opcional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    })();
+</script>
