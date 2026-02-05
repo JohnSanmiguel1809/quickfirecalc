@@ -231,38 +231,9 @@
 
     
 <article class="seo-article">
-        <div id="seo-content">
-            <h2>¿Qué es el Movimiento FIRE?</h2>
-            <p>El movimiento <b>FIRE</b> (Financial Independence, Retire Early) es una estrategia que busca la libertad financiera mediante el ahorro agresivo y la inversión inteligente. Nuestra calculadora utiliza la <b>Regla del 4%</b> para determinar cuándo tus activos pueden cubrir tus gastos anuales de por vida.</p>
-            
-            <h3>Cómo usar este simulador</h3>
-            <p>Introduce tus gastos mensuales actuales y tu capital disponible. Verás cómo el <b>interés compuesto</b> trabaja a tu favor. El gráfico muestra la intersección entre tus gastos anuales (línea roja) y tus ingresos pasivos proyectados (línea azul). Cuando la línea azul cruza a la roja, eres financieramente libre.</p>
-            
-            <h3>Riesgo y Volatilidad</h3>
-            <p>Los mercados no siempre suben. Por eso hemos incluido el botón <b>Market Crash</b>, que simula una caída del 50%. Un plan sólido debe resistir estas volatilidades. Es recomendable mantener un colchón de efectivo para evitar vender activos durante las crisis.</p>
-
-            <section class="faq-section">
-                <h3>Preguntas Frecuentes (FAQ)</h3>
-                <div class="faq-item">
-                    <b>¿Qué es la regla del 4%?</b>
-                    <p>Es una guía para determinar cuánto puedes retirar de tus inversiones sin agotar tu capital, asumiendo un retiro de 30 años ajustado por inflación.</p>
-                </div>
-                <div class="faq-item">
-                    <b>¿Cómo calculo mi Meta FIRE?</b>
-                    <p>La forma más rápida es multiplicar tus gastos anuales por 25. Ese es el capital necesario para ser libre financieramente.</p>
-                </div>
-                <div class="faq-item">
-                    <b>¿Qué papel juega la inflación?</b>
-                    <p>La inflación reduce tu poder de compra. Es vital usar una rentabilidad neta (rentabilidad menos inflación) para que los cálculos sean realistas.</p>
-                </div>
-                <div class="faq-item">
-                    <b>¿Es mejor ahorrar más o invertir mejor?</b>
-                    <p>Al principio, tu tasa de ahorro es el factor más determinante. Con el tiempo, el interés compuesto hace que la rentabilidad gane peso.</p>
-                </div>
-            </section>
-        </div>
-        <div class="ad-placeholder" style="margin-top: 30px;">AD SPACE - BOTTOM</div>
-    </article>
+    <div id="seo-content"></div>
+    <div class="ad-placeholder" style="margin-top: 30px;">AD SPACE - BOTTOM</div>
+</article>
 
     <footer>
         <a href="privacy.html">Privacy</a> | <a href="legal.html">Legal</a> | <a href="cookies.html">Cookies</a>
@@ -436,10 +407,12 @@
         fireChart.update('none');
     }
 
-    function switchLang(lang) {
+   function switchLang(lang) {
         currentLang = lang;
         localStorage.setItem('lang', lang);
         const t = translations[lang];
+        
+        // Actualizamos todos los textos del DOM
         document.getElementById('txt-h1').innerText = t.h1;
         document.getElementById('txt-subtitle').innerText = t.subtitle;
         document.getElementById('txt-label-spend').innerText = t.labelSpend;
@@ -449,30 +422,32 @@
         document.getElementById('txt-panic').innerText = t.panic;
         document.getElementById('txt-res-label').innerText = t.resLabel;
         document.getElementById('txt-meta-label').innerText = t.metaLabel;
+        
+        // Esta línea es la que rellena el div que dejaste vacío
         document.getElementById('seo-content').innerHTML = t.article;
+        
         document.getElementById('btn-es').classList.toggle('active', lang === 'es');
         document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-        calculate();
+
+        // Solo calculamos si el gráfico ya se inicializó
+        if(fireChart) calculate();
     }
 
-    function applyPanic() { panic = 0.5; document.getElementById('reset-btn').style.display = 'block'; calculate(); }
-    function resetPanic() { panic = 1; document.getElementById('reset-btn').style.display = 'none'; calculate(); }
-    function acceptCookies() { document.getElementById('cookie-banner').style.display = 'none'; localStorage.setItem('fire-cookies', '1'); }
-
-   window.onload = () => {
-        // 1. Configurar el tema
+    window.onload = () => {
+        // 1. Tema
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.getElementById('body').classList.add('dark-mode');
             document.getElementById('theme-icon').innerText = '☀️';
         }
         
-        // 2. INICIALIZAR EL GRÁFICO PRIMERO
+        // 2. INICIALIZAR GRÁFICO (Primero)
         initChart();
-        
-        // 3. APLICAR IDIOMA (que a su vez llama a calculate() y llena el gráfico)
-        const savedLang = localStorage.getItem('lang') || 'es';
-        switchLang(savedLang); 
+
+        // 3. CARGAR IDIOMA (Segundo)
+        // Esto rellenará el HTML vacío automáticamente
+        const langToLoad = localStorage.getItem('lang') || 'es';
+        switchLang(langToLoad);
         
         // 4. Cookies
         if(localStorage.getItem('fire-cookies')) {
