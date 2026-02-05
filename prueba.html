@@ -465,10 +465,15 @@
             document.getElementById('body').classList.add('dark-mode');
             document.getElementById('theme-icon').innerText = '☀️';
         }
+        
+        // Aplicar el idioma guardado
+        const savedLang = localStorage.getItem('lang') || 'es';
+        switchLang(savedLang); // Esta línea es la que faltaba
+        
         if(localStorage.getItem('fire-cookies')) document.getElementById('cookie-banner').style.display = 'none';
         
         initChart();
-        calculate(); // Recalculamos con los datos
+        calculate();
     };
 </script>
 </body>
