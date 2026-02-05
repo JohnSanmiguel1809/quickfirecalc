@@ -459,21 +459,25 @@
     function resetPanic() { panic = 1; document.getElementById('reset-btn').style.display = 'none'; calculate(); }
     function acceptCookies() { document.getElementById('cookie-banner').style.display = 'none'; localStorage.setItem('fire-cookies', '1'); }
 
-    window.onload = () => {
+   window.onload = () => {
+        // 1. Configurar el tema
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.getElementById('body').classList.add('dark-mode');
             document.getElementById('theme-icon').innerText = '☀️';
         }
         
-        // Aplicar el idioma guardado
-        const savedLang = localStorage.getItem('lang') || 'es';
-        switchLang(savedLang); // Esta línea es la que faltaba
-        
-        if(localStorage.getItem('fire-cookies')) document.getElementById('cookie-banner').style.display = 'none';
-        
+        // 2. INICIALIZAR EL GRÁFICO PRIMERO
         initChart();
-        calculate();
+        
+        // 3. APLICAR IDIOMA (que a su vez llama a calculate() y llena el gráfico)
+        const savedLang = localStorage.getItem('lang') || 'es';
+        switchLang(savedLang); 
+        
+        // 4. Cookies
+        if(localStorage.getItem('fire-cookies')) {
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
     };
 </script>
 </body>
