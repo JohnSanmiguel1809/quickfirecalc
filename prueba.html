@@ -477,13 +477,7 @@
         localStorage.setItem('lang', lang);
         const t = translations[lang];
 
-    // Si el pánico está activo (panic es 0.5), ponemos el texto de alerta. 
-    // Si no, ponemos el texto normal.
-    if (panic === 0.5) {
-        document.getElementById('txt-panic').innerText = t.panicActive;
-    } else {
-        document.getElementById('txt-panic').innerText = t.panic;
-    }
+  
            
         // Actualizamos todos los textos del DOM
         document.getElementById('txt-h1').innerText = t.h1;
