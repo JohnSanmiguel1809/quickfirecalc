@@ -504,12 +504,16 @@
 function applyPanic() { 
         panic = 0.5; 
         document.getElementById('reset-btn').style.display = 'block'; 
+        // Añadimos un aviso visual
+        document.getElementById('txt-panic').innerText = "📉 MERCADO -50%";
         calculate(); 
     }
 
     function resetPanic() { 
         panic = 1; 
         document.getElementById('reset-btn').style.display = 'none'; 
+        const t = translations[currentLang];
+        document.getElementById('txt-panic').innerText = t.panic;
         calculate(); 
     }
 
