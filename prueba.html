@@ -240,11 +240,11 @@
                         <span id="target-val" class="stat-value">$0</span>
                     </div> -->
 
-<div class="stat-card" id="card-fi" titleFi="Porcentaje de tu meta alcanzado...">
+<div class="stat-card" id="card-fi" title="Porcentaje de tu meta alcanzado...">
     <span class="stat-label">FI Ratio ⓘ</span>
     <span id="fi-ratio" class="stat-value">0%</span>
 </div>
-<div class="stat-card" id="card-meta" titleMeta="Capital necesario para vivir...">
+<div class="stat-card" id="card-meta" title="Capital necesario para vivir...">
     <span class="stat-label" id="txt-meta-label">Meta Total ⓘ</span>
     <span id="target-val" class="stat-value">$0</span>
 </div>
@@ -483,8 +483,10 @@
         document.getElementById('txt-panic').innerText = t.panic;
         document.getElementById('txt-res-label').innerText = t.resLabel;
         document.getElementById('txt-meta-label').innerText = t.metaLabel;
+        document.getElementById('txt-help-ret').innerText = t.helpRet; 
 
-       document.getElementById('txt-help-ret').innerText = t.helpRet; 
+        document.getElementById('card-fi').title = t.titleFi;
+        document.getElementById('card-meta').title = t.titleMeta;
        
         // Esta línea es la que rellena el div que dejaste vacío
         document.getElementById('seo-content').innerHTML = t.article;
