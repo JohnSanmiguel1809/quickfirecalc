@@ -153,6 +153,19 @@
         footer a { color: var(--primary); text-decoration: none; font-weight: 600; margin: 0 10px; }
 
         #cookie-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 800px; background: #0f172a; color: white; padding: 15px 25px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; z-index: 100; font-size: 0.8rem; }
+
+        .reset-btn {
+            display: none; /* Se oculta por defecto */
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            background: var(--card-bg);
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+           font-size: 1.2rem;
+            }
+
+        
     </style>
 </head>
 <body id="body">
@@ -434,6 +447,25 @@
         if(fireChart) calculate();
     }
 
+
+function applyPanic() { 
+        panic = 0.5; 
+        document.getElementById('reset-btn').style.display = 'block'; 
+        calculate(); 
+    }
+
+    function resetPanic() { 
+        panic = 1; 
+        document.getElementById('reset-btn').style.display = 'none'; 
+        calculate(); 
+    }
+
+    function acceptCookies() { 
+        document.getElementById('cookie-banner').style.display = 'none'; 
+        localStorage.setItem('fire-cookies', '1'); 
+    }
+
+    
     window.onload = () => {
         // 1. Tema
         const savedTheme = localStorage.getItem('theme');
