@@ -330,12 +330,10 @@
             
             </section>`,
             helpRet: "Se recomienda usar una tasa neta (ej. 5% o 7%) ya descontando la inflación para mayor precisión.",
-            titleFi: "Porcentaje de tu objetivo alcanzado basado en tus ahorros actuales y rendimiento esperado.",
-            metaLabel: "Meta Total ⓘ",
-            titleMeta: "Capital necesario para vivir de tus rentas (Gastos anuales x 25)."
 
-            panic: "⚠️ CRASH MERCADO",
-            panicActive: "📉 MERCADO -50%",
+        titleFi: "Porcentaje de tu objetivo alcanzado basado en tus ahorros actuales y rendimiento esperado.",
+        metaLabel: "Meta Total ⓘ",
+        titleMeta: "Capital necesario para vivir de tus rentas (Gastos anuales x 25)."
 
 
             
@@ -390,12 +388,12 @@
        
             </section>`,
         helpRet: "It is recommended to use a net rate (e.g., 5% or 7%) already accounting for inflation for better accuracy.",
+
+
         titleFi: "Percentage of your goal reached based on current savings and expected returns.",
         metaLabel: "Total Target ⓘ",
         titleMeta: "Total capital needed to live off your investments (Annual expenses x 25)."
-
-        panic: "⚠️ MARKET CRASH",
-        panicActive: "📉 MARKET -50%",
+    
 
             
         }
@@ -476,9 +474,7 @@
         currentLang = lang;
         localStorage.setItem('lang', lang);
         const t = translations[lang];
-
-  
-           
+        
         // Actualizamos todos los textos del DOM
         document.getElementById('txt-h1').innerText = t.h1;
         document.getElementById('txt-subtitle').innerText = t.subtitle;
@@ -508,19 +504,13 @@
 function applyPanic() { 
         panic = 0.5; 
         document.getElementById('reset-btn').style.display = 'block'; 
-         // Buscamos la traducción activa
-        const t = translations[currentLang];
-        document.getElementById('txt-panic').innerText = t.panicActive;
         calculate(); 
     }
 
     function resetPanic() { 
         panic = 1; 
         document.getElementById('reset-btn').style.display = 'none'; 
-        // Restauramos el texto original según el idioma
-        const t = translations[currentLang];
-        document.getElementById('txt-panic').innerText = t.panic;
-        calculate();
+        calculate(); 
     }
 
     function acceptCookies() { 
