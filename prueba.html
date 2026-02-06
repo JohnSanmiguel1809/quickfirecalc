@@ -197,8 +197,14 @@
             </div>
             <div class="input-group">
                 <label id="txt-label-ret">Rentabilidad (%)</label>
-                <div class="input-wrapper"><span>%</span><input type="number" id="return" value="7" oninput="calculate()"></div>
+                <div class="input-wrapper">
+            <span>%</span>
+            <input type="number" id="return" value="7" oninput="calculate()">
             </div>
+            <small id="txt-help-ret" style="display: block; font-size: 0.7rem; color: var(--gray); margin-top: 5px; line-height: 1.2;">
+            Se recomienda usar una tasa neta (ej. 5% o 7%) ya descontando la inflación.
+            </small>
+        </div>
 
             <div class="action-buttons">
                 <button class="panic-btn" id="txt-panic" onclick="applyPanic()">⚠️ CRASH MERCADO</button>
@@ -285,6 +291,7 @@
                     <p>Al principio, tu tasa de ahorro es el factor más determinante. Con el tiempo, el interés compuesto hace que la rentabilidad gane peso.</p>
                 </div>
             </section>`
+            helpRet: "Se recomienda usar una tasa neta (ej. 5% o 7%) ya descontando la inflación para mayor precisión.",
         },
         en: {
             h1: "Financial Freedom", subtitle: "Your roadmap to early retirement.",
@@ -324,6 +331,7 @@
                     <p>At the beginning, your savings rate is the most determining factor. Over time, compound interest makes investment returns more significant.</p>
                 </div>
             </section>`
+        helpRet: "It is recommended to use a net rate (e.g., 5% or 7%) already accounting for inflation for better accuracy.",
         }
     };
 
@@ -413,7 +421,9 @@
         document.getElementById('txt-panic').innerText = t.panic;
         document.getElementById('txt-res-label').innerText = t.resLabel;
         document.getElementById('txt-meta-label').innerText = t.metaLabel;
-        
+
+       document.getElementById('txt-help-ret').innerText = t.helpRet; 
+       
         // Esta línea es la que rellena el div que dejaste vacío
         document.getElementById('seo-content').innerHTML = t.article;
         
