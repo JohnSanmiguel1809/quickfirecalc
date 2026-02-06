@@ -438,37 +438,75 @@
     }
 
     function calculate() {
-        const t = translations[currentLang];
-        const spend = (parseFloat(document.getElementById('spend').value) || 0) * 12;
-        const cap = (parseFloat(document.getElementById('capital').value) || 0) * panic;
-        const save = parseFloat(document.getElementById('save').value) || 0;
-        const rate = (parseFloat(document.getElementById('return').value) || 0) / 100;
-        const target = spend * 25;
+    const t = translations[currentLang];
+    
+    // 1. Obtención de valores y validación inicial
+    const spendInput = parseFloat(document.getElementById('spend').value) || 0;
+    const spend = spendInput * 12;
+    const cap = (parseFloat(document.getElementById('capital').value) || 0) * panic;
+    const save = parseFloat(document.getElementById('save').value) || 0;
+    const rate = (parseFloat(document.getElementById('return').value) || 0) / 100;
+    const target = spend * 25;
 
-        document.getElementById('fi-ratio').innerText = target > 0 ? Math.min((cap/target)*100, 100).toFixed(1) + "%" : "0%";
-        document.getElementById('target-val').innerText = "$" + target.toLocaleString();
-
-        let labels = [], dInc = [], dExp = [], tCap = cap;
-        for (let y = 0; y <= 40; y++) {
-            labels.push(y); dExp.push(spend); dInc.push(Math.round(tCap * 0.04));
-            for(let m = 0; m < 12; m++) tCap = (tCap + save) * (1 + (rate/12));
-        }
-
-        let months = 0, cCap = cap;
-        if ((save*12 + cCap*rate) > 0) {
-            while(cCap < target && months < 1200) { cCap = (cCap + save) * (1 + (rate/12)); months++; }
-        }
-
-        const yrs = Math.floor(months / 12), mths = months % 12;
-        document.getElementById('fire-date').innerText = cap >= target ? t.free : (months >= 1200 ? "∞" : `${yrs}${currentLang==='es'?'a':'y'} ${mths}m`);
+    // 2. Control de Gasto Cero: Si no hay gastos, ya es financieramente libre
+    if (spendInput <= 0) {
+        document.getElementById('fi-ratio').innerText = "100%";
+        document.getElementById('target-val').innerText = "$0";
+        document.getElementById('fire-date').innerText = t.free;
         
-        fireChart.data.labels = labels;
-        fireChart.data.datasets[0].data = dInc;
-        fireChart.data.datasets[0].label = t.chartInc;
-        fireChart.data.datasets[1].data = dExp;
-        fireChart.data.datasets[1].label = t.chartExp;
-        fireChart.update('none');
+        // Limpiar gráfico para evitar errores visuales
+        fireChart.data.labels = [];
+        fireChart.data.datasets[0].data = [];
+        fireChart.data.datasets[1].data = [];
+        fireChart.update();
+        return; 
     }
+
+    // 3. Generación de datos para el gráfico
+    let labels = [], dInc = [], dExp = [], tCap = cap;
+    for (let y = 0; y <= 40; y++) {
+        labels.push(y); 
+        dExp.push(spend); 
+        dInc.push(Math.round(tCap * 0.04));
+        for(let m = 0; m < 12; m++) {
+            tCap = (tCap + save) * (1 + (rate/12));
+        }
+    }
+
+    // 4. Cálculo del tiempo hasta FIRE con protección de bucle infinito
+    let months = 0, cCap = cap;
+    // Si el capital inicial + ahorro no crece (rentabilidad negativa o cero), nunca llegará
+    if ((save * 12 + cCap * rate) > 0) {
+        while(cCap < target && months < 1200) { 
+            cCap = (cCap + save) * (1 + (rate/12)); 
+            months++; 
+        }
+    } else {
+        months = 1200; // Activa el símbolo de infinito
+    }
+
+    // 5. Formateo de resultados y validación NaN
+    const yrs = Math.floor(months / 12), mths = months % 12;
+    let resultText = cap >= target ? t.free : (months >= 1200 ? "∞" : `${yrs}${currentLang==='es'?'a':'y'} ${mths}m`);
+
+    // Protección final si el usuario deja campos vacíos o mete caracteres extraños
+    if (isNaN(months) || isNaN(target)) {
+        resultText = currentLang === 'es' ? "Revisa datos" : "Check inputs";
+    }
+
+    // 6. Actualización de la interfaz
+    document.getElementById('fire-date').innerText = resultText;
+    document.getElementById('fi-ratio').innerText = target > 0 ? Math.min((cap/target)*100, 100).toFixed(1) + "%" : "0%";
+    document.getElementById('target-val').innerText = "$" + target.toLocaleString();
+    
+    // 7. Actualización del gráfico
+    fireChart.data.labels = labels;
+    fireChart.data.datasets[0].data = dInc;
+    fireChart.data.datasets[0].label = t.chartInc;
+    fireChart.data.datasets[1].data = dExp;
+    fireChart.data.datasets[1].label = t.chartExp;
+    fireChart.update('none');
+}
 
    function switchLang(lang) {
         currentLang = lang;
